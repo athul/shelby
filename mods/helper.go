@@ -1,7 +1,6 @@
-package main
+package mods
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -13,15 +12,17 @@ func cwdir() string {
 	}
 	return filepath.Clean(wd)
 }
-func emptifier(list []string, val string) string {
+func emptifier(list []string, val string) []string {
 	if val == "" {
 		return list
 	}
 	return append(list, val)
 }
-func main() {
+
+//Test Cases for debugging are below
+/* func main() {
 	wd := cwdir()
 	fmt.Print(wd)
-	emp := make([]string, "njan", "nee")
-	fmt.Print(emptifier(emp, wd))
-}
+	emp := make([]string, 0, 3)
+	fmt.Println(emptifier(emp, wd))
+} */
