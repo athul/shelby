@@ -3,6 +3,9 @@ package mods
 import (
 	"os"
 	"path/filepath"
+	"strings"
+
+	"github.com/talal/go-bits/color"
 )
 
 func cwdir() string {
@@ -17,6 +20,14 @@ func emptifier(list []string, val string) []string {
 		return list
 	}
 	return append(list, val)
+}
+func stripHomeDir(path string) string {
+	return strings.Replace(path, os.Getenv("HOME"), "~", 1)
+}
+func handleError(err error) {
+	if err != nil {
+		color.Fprintf(os.Stderr, color.Red, "Prompt error: %v\n", err)
+	}
 }
 
 //Test Cases for debugging are below

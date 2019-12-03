@@ -1,39 +1,46 @@
 package mods
 
 import (
-	"fmt"
-	/* "strings"
-	"ioutils" */
+	"io/ioutil"
 	"os"
 	"path/filepath"
-	//"github.com/talal/go-bits/colors"
+	"strings"
 )
 
-type gitRepo struct {
-	Rootpath string
-	gDir     string
-}
-
-func getrepo(path string) (*gitRepo, error) {
-	gitent := filepath.Join(path, ".git")
-	fi, err := os.Stat(gitent)
+func findGitRepo(path string) (string, error) {
+	gitEntry := filepath.Join(path, ".git")
+	fi, err := os.Stat(gitEntry)
 	switch {
 	case err == nil:
 		//found - continue below with further checks
 	case !os.IsNotExist(err):
-		return nil, err
+		return "", err
 	case path == "/":
-		return nil, nil
+		return "", nil
 	default:
-		return getrepo(filepath.Dir(path))
+		return findGitRepo(filepath.Dir(path))
 	}
-	if fi.Mode().IsDir() {
-		//normal case - .git is a directory
-		return &gitRepo{Rootpath: path, gDir: gitent}, nil
+
+	if !fi.IsDir() {
+		return "", nil
 	}
-	return nil, fmt.Errorf("read %s: missing gitdir directive", gitent)
+
+	return gitEntry, nil
 }
-func main() {
-	dir, ee := getrepo(filepath.Clean(os.Getenv("PWD")))
-	fmt.Println(dir, ee)
+
+func currentGitBranch(gitDir string) string {
+	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
+	if err != nil {
+		handleError(err)
+		return "unknown"
+	}
+	refSpec := strings.TrimSpace(string(bytes))
+
+	// detached HEAD?
+	if !strings.HasPrefix(refSpec, "ref: refs/") {
+		return "detached"
+	}
+
+	refSpecDisplay := strings.TrimPrefix(refSpec, "ref: refs/heads/")
+	return refSpecDisplay
 }

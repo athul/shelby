@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"github.com/athul/shelby/mods"
 	"github.com/talal/go-bits/color"
 )
 
@@ -11,5 +12,5 @@ func main() {
 		color.Fprint(os.Stderr, color.Red, "Error.....This is working\n")
 		os.Exit(1)
 	}
-	//os.Stdout.Write([]byte("\n" + prompt.Info() + "\n"))
+	os.Stdout.Write([]byte("\n" + mods.Info() + "\n"))
 }
