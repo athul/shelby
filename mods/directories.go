@@ -31,11 +31,11 @@ func getDir(cwd string) string {
 	handleError(err)
 
 	if gitDir != "" {
-		return color.Sprintf(color.Blue, pathToDisplay) + " " +
+		return color.Sprintf(color.Red, pathToDisplay) + " " +
 			color.Sprintf(color.Green, ``+currentGitBranch(gitDir))
 	}
 
-	return color.Sprintf(color.Blue, pathToDisplay)
+	return color.Sprintf(color.Cyan, pathToDisplay)
 }
 
 func findNearestAccessiblePath(path string) string {

@@ -1,8 +1,10 @@
 package mods
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/talal/go-bits/color"
@@ -28,6 +30,19 @@ func handleError(err error) {
 	if err != nil {
 		color.Fprintf(os.Stderr, color.Red, "Prompt error: %v\n", err)
 	}
+}
+func getExitCodeField(arg string) string {
+	exitCode, err := strconv.Atoi(arg)
+	if err == nil && exitCode > 0 {
+		return withColor("1;31", "exit:"+arg)
+	}
+	return ""
+}
+func withColor(color, text string) string {
+	if color == "0" {
+		return text
+	}
+	return fmt.Sprintf("\x1B[%sm%s\x1B[0m", color, text)
 }
 
 //Test Cases for debugging are below
