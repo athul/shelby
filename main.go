@@ -1,23 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/athul/shelby/mods"
+	"github.com/talal/go-bits/color"
 )
 
 func main() {
-	os.Exit(shelbyexec(filepath.Base(os.Args[0]), os.Args[1:], true))
+	//os.Exit(shelbyexec(filepath.Base(os.Args[0]), os.Args[1:], true))
 
-	/* if len(os.Args) > 1 {
+	if len(os.Args) > 1 {
 		color.Fprint(os.Stderr, color.Red, "Error.....\n")
 		os.Exit(1)
 	}
-	os.Stdout.Write([]byte("\n" + mods.Info() + "\n")) */
+	os.Stdout.Write([]byte("\n" + mods.Info() + "\n"))
+	shellIdent := ""
+	os.Stdout.Write([]byte(shellIdent + "❯ "))
 }
-func shelbyexec(applet string, args []string, allowGofu bool) int {
+
+/* func shelbyexec(applet string, args []string, allowGofu bool) int {
 	//allow explicit specification of applet as "./build/gofu <applet> <args>"
 	if allowGofu && applet == "main" || allowGofu && applet == "shelby" {
 		if len(args) == 0 {
@@ -34,4 +36,4 @@ func shelbyexec(applet string, args []string, allowGofu bool) int {
 		fmt.Fprintln(os.Stderr, "ERROR: unknown applet: "+applet)
 		return 255
 	}
-}
+} */
