@@ -10,7 +10,7 @@ Here is a Benchmarking Test
 -----
 ## Installation
 ```bash
-$ sh -c "$(curl -sL https://git.io/JeDSU)"
+$ sh -c "$(curl -sL https://git.io/getshelby)"
 ```
 
 ## Usage
