@@ -9,7 +9,13 @@ Here is a Benchmarking Test
 
 -----
 ## Installation
-Initially the Packaging is so dull and I'm really new to this stuff. Even the shell scripts fail me. So Follow the steps below,
+Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
+- Run
+```bash
+$ sh -c "$(curl -sL https://git.io/getshelby)"	
+```
+----
+
 - Download the binary from the [Releases](https://github.com/athul/shelby/releases) page
 - Move the Binary to `/usr/local/bin/`
 - Enjoy :tada:
