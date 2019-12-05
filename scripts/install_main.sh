@@ -4,4 +4,4 @@ wget https://github.com/athul/shelby/releases/download/0.1.0/shelby
 printf "\e[1;34m==> Installing shelby\e[0m\n"
 sudo mv -f shelby /usr/local/bin/shelby
 printf "\e[1;32m==> shelby successfully installed 🎉🎉 Enjoy....."
-sudo chmod 775 /usr/local/bin/shelb
+sudo chmod 775 /usr/local/bin/shelby
