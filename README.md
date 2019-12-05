@@ -9,10 +9,19 @@ Here is a Benchmarking Test
 
 -----
 ## Installation
-```bash
-$ sh -c "$(curl -sL https://git.io/getshelby)"
-```
+Initially the Packaging is so dull and I'm really new to this stuff. Even the shell scripts fail me. So Follow the steps below,
+- Download the binary from the [Releases](https://github.com/athul/shelby/releases) page
+- Move the Binary to `/usr/local/bin/`
+- Enjoy :tada:
 
+OR
+
+- Clone the Repo
+- Run `go get -v`
+- Run `go build`
+- Move the Binary to `/usr/local/bin/`
+
+I hope this gets improved soon
 ## Usage
 
 The following usage examples are just one example of how Mímir can be
