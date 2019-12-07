@@ -1,0 +1,19 @@
+name: StarBoy	
+
+on:	
+  watch:	
+    types: [started]	
+
+jobs:	
+  build:	
+
+    runs-on: ubuntu-latest	
+
+    steps:	
+      - name: Statusoli	
+        uses: athul/statusoli@master	
+        if: always()	
+        with:	
+          chat: ${{ secrets.chat }}	
+          token: ${{ secrets.token }}	
+          status: ${{ job.status }}
