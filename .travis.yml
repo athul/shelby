@@ -24,5 +24,3 @@ deploy:
 # Windows doesn't work yet, due to the readonly segment
 #    - "release/powerline-go-windows-amd64"
   skip_cleanup: true
-  on:
-    tags: true
