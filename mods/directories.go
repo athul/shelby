@@ -26,13 +26,14 @@ func getDir(cwd string) string {
 
 	pathToDisplay := stripHomeDir(cwd)
 	pathToDisplay = shortenLongPath(pathToDisplay, 2)
-
+	gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
 
 	if gitDir != "" {
-		return color.Sprintf(color.Red, pathToDisplay) + " " +
-			color.Sprintf(color.Green, ``+currentGitBranch(gitDir))
+
+		return color.Sprintf(color.Red, gbpath) + " " +
+			color.Sprintf(color.Green, ` `+currentGitBranch(gitDir))
 	}
 
 	return color.Sprintf(color.Cyan, pathToDisplay)
@@ -63,3 +64,7 @@ func shortenLongPath(path string, length int) string {
 	shortenedPList = append(shortenedPList, pList[len(pList)-length:]...)
 	return lname
 }
+
+/* func findstatus(r string) string {
+
+} */
