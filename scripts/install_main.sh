@@ -1,7 +1,7 @@
 # !/bin/bash
 OS=$(uname -s)
 printf "\e[1;34m==> Downloading shelby for $(OS)\e[0m\n"
-wget https://github.com/athul/shelby/releases/download/0.1.1/shelby_${OS}_amd64
+wget https://github.com/athul/shelby/releases/download/0.1.1/shelby-${OS}-amd64
 printf "\e[1;34m==> Installing shelby\e[0m\n"
 sudo mv -f shelby /usr/local/bin/shelby
 sudo chmod 775 /usr/local/bin/shelby
