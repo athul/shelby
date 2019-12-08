@@ -3,6 +3,7 @@ package mods
 import (
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 )
@@ -43,4 +44,21 @@ func currentGitBranch(gitDir string) string {
 
 	refSpecDisplay := strings.TrimPrefix(refSpec, "ref: refs/heads/")
 	return refSpecDisplay
+}
+func rungitcommands(cmd string) (string, error) { // , args ...string as params
+	command := exec.Command(cmd) //, args... as params
+	op, err := command.Output()
+	return string(op), err
+}
+
+func iscontentmodified(path string) bool {
+	out, err := rungitcommands("git status --porcelain -b")
+	status := strings.Split(out, "\n")
+	if err != nil {
+		return false
+	}
+	if status[1] != "" {
+		return true
+	}
+	return false
 }
