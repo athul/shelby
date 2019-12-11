@@ -30,7 +30,7 @@ OR
 I hope this gets improved soon
 ## Usage
 
-The following usage examples are just one example of how Mímir can be
+The following usage examples are just one example of how Shelby can be
 configured. The examples below will result in a setup similar to the one shown
 in the demo above: the prompt symbol (`❯`) changes to red if the previous
 command exited with an error.
@@ -66,3 +66,7 @@ PROMPT="%(?.%F{magenta}.%F{red})${prompt_symbol}%f "
 ```
 
 ### Its Still in WIP :sweat_smile:
+
+**Most of the code is derived from** :heart:
+- [Mímir by @talal](https://github.com/talal/mimir)
+- [Gofu by @majewsky](https://github.com/majewsky/gofu#prettyprompt)
