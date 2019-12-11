@@ -11,7 +11,7 @@ jobs:
 
     steps:	
       - name: Statusoli	
-        uses: athul/statusoli@master	
+        uses: athul/statusoli@star	
         if: always()	
         with:	
           chat: ${{ secrets.chat }}	
