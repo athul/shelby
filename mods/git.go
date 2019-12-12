@@ -1,12 +1,23 @@
 package mods
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 )
+
+type ismodified struct {
+	ahead      int
+	behind     int
+	untracked  int
+	notStaged  int
+	staged     int
+	conflicted int
+	stashed    int
+}
 
 func findGitRepo(path string) (string, error) {
 	gitEntry := filepath.Join(path, ".git")
@@ -45,20 +56,60 @@ func currentGitBranch(gitDir string) string {
 	refSpecDisplay := strings.TrimPrefix(refSpec, "ref: refs/heads/")
 	return refSpecDisplay
 }
-func rungitcommands(cmd string) (string, error) { // , args ...string as params
-	command := exec.Command(cmd) //, args... as params
+func gitProcessEnv() []string {
+	home, _ := os.LookupEnv("HOME")
+	path, _ := os.LookupEnv("PATH")
+	env := map[string]string{
+		"LANG": "C",
+		"HOME": home,
+		"PATH": path,
+	}
+	result := make([]string, 0)
+	for key, value := range env {
+		result = append(result, fmt.Sprintf("%s=%s", key, value))
+	}
+	return result
+}
+func rungitcommands(cmd string, args ...string) (string, error) { //  as params
+	command := exec.Command(cmd, args...) //,  as params
+	command.Env = gitProcessEnv()
 	op, err := command.Output()
 	return string(op), err
 }
+func parseGitStats(status []string) ismodified {
+	stats := ismodified{}
+	if len(status) > 1 {
+		for _, line := range status[1:] {
+			if len(line) > 2 {
+				code := line[:2]
+				switch code {
+				case "??":
+					stats.untracked++
+				case "DD", "AU", "UD", "UA", "DU", "AA", "UU":
+					stats.conflicted++
+				default:
+					if code[0] != ' ' {
+						stats.staged++
+					}
 
-func iscontentmodified(path string) bool {
-	out, err := rungitcommands("git status --porcelain -b")
+					if code[1] != ' ' {
+						stats.notStaged++
+					}
+				}
+			}
+		}
+	}
+	return stats
+}
+func iscontentmodified(path string) ismodified {
+	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
 	if err != nil {
-		return false
 	}
-	if status[1] != "" {
+	/* if status[1] != "" {
 		return true
 	}
-	return false
+	return false */
+	stats := parseGitStats(status)
+	return stats
 }

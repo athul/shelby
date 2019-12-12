@@ -1,6 +1,7 @@
 package mods
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -29,7 +30,6 @@ func getDir(cwd string) string {
 	gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
-
 	if gitDir != "" {
 
 		return color.Sprintf(color.Magenta, gbpath) + " on " +
