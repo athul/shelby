@@ -105,11 +105,8 @@ func iscontentmodified(path string) ismodified {
 	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
 	if err != nil {
+
 	}
-	/* if status[1] != "" {
-		return true
-	}
-	return false */
 	stats := parseGitStats(status)
 	return stats
 }

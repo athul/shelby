@@ -1,7 +1,6 @@
 package mods
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -30,10 +29,19 @@ func getDir(cwd string) string {
 	gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
+	isconmod := iscontentmodified(gitDir)
 	if gitDir != "" {
-
-		return color.Sprintf(color.Magenta, gbpath) + " on " +
+		nm := color.Sprintf(color.Magenta, gbpath) + " on " +
 			color.Sprintf(color.Green, ` `+currentGitBranch(gitDir))
+
+		if isconmod.notStaged != 0 {
+			return nm + color.Sprintf(color.BrightRed, ` [!]`)
+		}
+		if isconmod.untracked != 0 {
+			return nm + color.Sprintf(color.White, ` [?]`)
+		}
+
+		return nm
 	}
 
 	return color.Sprintf(color.Cyan, pathToDisplay)
