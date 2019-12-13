@@ -11,8 +11,8 @@ before_deploy:
   - mkdir -p release
   - "GOOS=linux  GOARCH=amd64 go build -o release/shelby-linux-amd64"
   - "GOOS=darwin GOARCH=amd64 go build -o release/shelby-darwin-amd64"
-  - "tar -cvzf shelby-darwin-amd64.tar.gz shelby-darwin-amd64"
-  - "tar -cvzf shelby-linux-amd64.tar.gz shelby-darwin-amd64"
+  - "tar -cvzf release/shelby-darwin-amd64.tar.gz release/shelby-darwin-amd64"
+  - "tar -cvzf release/shelby-linux-amd64.tar.gz release/shelby-darwin-amd64"
 
 deploy:
   provider: releases
