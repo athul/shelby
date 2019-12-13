@@ -9,8 +9,8 @@ before_script:
 # before we deploy, we go build for all operating systems we would like to support
 before_deploy:
   - mkdir -p release
-  - "GOOS=linux  GOARCH=amd64 go build -o release/shelby-linux-amd64"
-  - "GOOS=darwin GOARCH=amd64 go build -o release/shelby-darwin-amd64"
+  - "GOOS=linux  GOARCH=amd64 go build -o release/shelby-linux-amd64 -ldflags="-s -w""
+  - "GOOS=darwin GOARCH=amd64 go build -o release/shelby-darwin-amd64 -ldflags="-s -w""
   - "tar -cvzf release/shelby-darwin-amd64.tar.gz release/shelby-darwin-amd64"
   - "tar -cvzf release/shelby-linux-amd64.tar.gz release/shelby-darwin-amd64"
 
