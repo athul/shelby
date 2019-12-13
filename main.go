@@ -18,22 +18,3 @@ func main() {
 	shellIdent := ""
 	os.Stdout.Write([]byte(shellIdent + "❯ "))
 }
-
-/* func shelbyexec(applet string, args []string, allowGofu bool) int {
-	//allow explicit specification of applet as "./build/gofu <applet> <args>"
-	if allowGofu && applet == "main" || allowGofu && applet == "shelby" {
-		if len(args) == 0 {
-			fmt.Fprintln(os.Stderr, "Working I guess")
-			return 1
-		}
-		return shelbyexec(args[0], args[1:], false)
-	}
-
-	switch applet {
-	case "run":
-		return mods.Info(args)
-	default:
-		fmt.Fprintln(os.Stderr, "ERROR: unknown applet: "+applet)
-		return 255
-	}
-} */

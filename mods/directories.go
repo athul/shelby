@@ -3,6 +3,7 @@ package mods
 import (
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/talal/go-bits/color"
@@ -30,18 +31,10 @@ func getDir(cwd string) string {
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
 	isconmod := iscontentmodified(gitDir)
+
 	if gitDir != "" {
-		nm := color.Sprintf(color.Magenta, gbpath) + " on " +
-			color.Sprintf(color.Green, ` `+currentGitBranch(gitDir))
-
-		if isconmod.notStaged != 0 {
-			return nm + color.Sprintf(color.BrightRed, ` [!]`)
-		}
-		if isconmod.untracked != 0 {
-			return nm + color.Sprintf(color.White, ` [?]`)
-		}
-
-		return nm
+		imod := findstatus(isconmod, gbpath, gitDir)
+		return imod
 	}
 
 	return color.Sprintf(color.Cyan, pathToDisplay)
@@ -56,6 +49,18 @@ func findNearestAccessiblePath(path string) string {
 	return findNearestAccessiblePath(filepath.Dir(path))
 }
 
-/* func findstatus(r string) string {
+func findstatus(mods ismodified, path string, gdir string) string {
+	nm := color.Sprintf(color.Magenta, path) + " on " +
+		color.Sprintf(color.Green, ` `+currentGitBranch(gdir))
+	if mods.notStaged != 0 && mods.untracked != 0 {
+		return nm + color.Sprintf(color.BrightRed, `[`+strconv.Itoa(mods.notStaged)+`!]`+`[`+strconv.Itoa(mods.untracked)+`+]`)
+	}
+	if mods.notStaged != 0 {
+		return nm + color.Sprintf(color.BrightRed, `[`+strconv.Itoa(mods.notStaged)+`!]`)
+	}
+	if mods.untracked != 0 {
+		return nm + color.Sprintf(color.BrightRed, `[`+strconv.Itoa(mods.untracked)+`+]`)
+	}
 
-} */
+	return nm
+}
