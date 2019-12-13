@@ -4,9 +4,6 @@ Shelby is a fast :rocket: ,lightweight 💨 ,minimal🧸, shell prompt written i
 
 ![](/shelby.gif)
 
-Here is a Benchmarking Test
-![](/bnch.gif)
-
 -----
 ## Installation
 Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
@@ -15,7 +12,7 @@ Initially the Packaging is so dull and I'm really new to this stuff. Follow the 
 $ sh -c "$(curl -sL https://git.io/getshelby)"	
 ```
 ----
-
+OR
 - Download the binary from the [Releases](https://github.com/athul/shelby/releases) page
 - Move the Binary to `/usr/local/bin/`
 - Enjoy :tada:
