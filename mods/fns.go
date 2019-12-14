@@ -44,11 +44,3 @@ func withColor(color, text string) string {
 	}
 	return fmt.Sprintf("\x1B[%sm%s\x1B[0m", color, text)
 }
-
-//Test Cases for debugging are below
-/* func main() {
-	wd := cwdir()
-	fmt.Print(wd)
-	emp := make([]string, 0, 3)
-	fmt.Println(emptifier(emp, wd))
-} */

@@ -39,7 +39,6 @@ func findGitRepo(path string) (string, error) {
 
 	return gitEntry, nil
 }
-
 func currentGitBranch(gitDir string) string {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
