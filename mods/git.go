@@ -122,3 +122,6 @@ func iscontentmodified(path string) ismodified {
 	}
 	return stats
 }
+
+
+mm;lm;
