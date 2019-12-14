@@ -49,8 +49,9 @@ func findNearestAccessiblePath(path string) string {
 }
 
 func findstatus(mods ismodified, path string, gdir string) string {
+	branch := currentGitBranch(gdir)
 	nm := color.Sprintf(color.Magenta, path) + " on " +
-		color.Sprintf(color.Green, ` `+currentGitBranch(gdir))
+		color.Sprintf(color.Green, ` `+branch)
 	if mods.notStaged != 0 && mods.untracked != 0 {
 		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`+`[`+strconv.Itoa(mods.untracked)+`+]`)
 	}
@@ -59,6 +60,10 @@ func findstatus(mods ismodified, path string, gdir string) string {
 	}
 	if mods.untracked != 0 {
 		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.untracked)+`+]`)
+	}
+	ahead := isahead(path, branch)
+	if ahead != 0 {
+		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(ahead)+`x]`)
 	}
 
 	return nm

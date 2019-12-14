@@ -108,20 +108,17 @@ func iscontentmodified(path string) ismodified {
 
 	}
 	stats := parseGitStats(status)
-	brinfo:=
-	if brinfo["local"] != "" {
-		ahead, _ := strconv.ParseInt(brinfo["ahead"], 10, 32)
-		stats.ahead = int(ahead)
 
-		behind, _ := strconv.ParseInt(brinfo["behind"], 10, 32)
-		stats.behind = int(behind)
-
-		branch = brinfo["local"]
-	} else {
-		branch = getGitDetachedBranch(p)
-	}
 	return stats
 }
+func isahead(path string, branch string) int {
+	mods := ismodified{}
+	out, err := rungitcommands("git", "rev-list", "origin/"+branch+"...HEAD", "--ignore-submodules", "--count")
+	if err != nil {
 
-
-mm;lm;
+	}
+	ah, err := strconv.Atoi(out)
+	mods.ahead = ah
+	fmt.Print(ah)
+	return mods.ahead
+}
