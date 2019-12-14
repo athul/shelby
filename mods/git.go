@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -52,8 +53,8 @@ func currentGitBranch(gitDir string) string {
 		return "detached"
 	}
 
-	refSpecDisplay := strings.TrimPrefix(refSpec, "ref: refs/heads/")
-	return refSpecDisplay
+	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
+	return branch
 }
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")
@@ -107,5 +108,17 @@ func iscontentmodified(path string) ismodified {
 
 	}
 	stats := parseGitStats(status)
+	brinfo:=
+	if brinfo["local"] != "" {
+		ahead, _ := strconv.ParseInt(brinfo["ahead"], 10, 32)
+		stats.ahead = int(ahead)
+
+		behind, _ := strconv.ParseInt(brinfo["behind"], 10, 32)
+		stats.behind = int(behind)
+
+		branch = brinfo["local"]
+	} else {
+		branch = getGitDetachedBranch(p)
+	}
 	return stats
 }
