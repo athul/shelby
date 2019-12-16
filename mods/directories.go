@@ -1,7 +1,6 @@
 package mods
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -69,7 +68,7 @@ func findstatus(mods ismodified, path string, gdir string, status chan string) {
 
 	go isahead(path, branch, cmod)
 	ahead := <-cmod
-	fmt.Print(ahead)
+	//fmt.Print(ahead)
 	if ahead != 0 {
 		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(ahead)+`x]`)
 	}
