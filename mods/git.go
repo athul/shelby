@@ -111,8 +111,9 @@ func iscontentmodified(path string) ismodified {
 
 	return stats
 }
-func isahead(path string, branch string) int {
+func isahead(path string, branch string, cmod chan int) {
 	mods := ismodified{}
+
 	out, err := rungitcommands("git", "rev-list", "origin/"+branch+"...HEAD", "--ignore-submodules", "--count")
 	if err != nil {
 
@@ -120,5 +121,5 @@ func isahead(path string, branch string) int {
 	ah, err := strconv.Atoi(out)
 	mods.ahead = ah
 	fmt.Print(ah)
-	return mods.ahead
+	cmod <- mods.ahead
 }

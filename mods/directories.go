@@ -1,6 +1,7 @@
 package mods
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -33,7 +34,9 @@ func getDir(cwd string) string {
 	isconmod := iscontentmodified(gitDir)
 
 	if gitDir != "" {
-		imod := findstatus(isconmod, gbpath, gitDir)
+		status := make(chan string)
+		go findstatus(isconmod, gbpath, gitDir, status)
+		imod := <-status
 		return imod
 	}
 	return color.Sprintf(color.Cyan, pathToDisplay)
@@ -48,23 +51,28 @@ func findNearestAccessiblePath(path string) string {
 	return findNearestAccessiblePath(filepath.Dir(path))
 }
 
-func findstatus(mods ismodified, path string, gdir string) string {
+func findstatus(mods ismodified, path string, gdir string, status chan string) {
+
 	branch := currentGitBranch(gdir)
 	nm := color.Sprintf(color.Magenta, path) + " on " +
 		color.Sprintf(color.Green, ` `+branch)
 	if mods.notStaged != 0 && mods.untracked != 0 {
-		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`+`[`+strconv.Itoa(mods.untracked)+`+]`)
+		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`+`[`+strconv.Itoa(mods.untracked)+`+]`)
 	}
 	if mods.notStaged != 0 {
-		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`)
+		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`)
 	}
 	if mods.untracked != 0 {
-		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.untracked)+`+]`)
+		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.untracked)+`+]`)
 	}
-	ahead := isahead(path, branch)
+	cmod := make(chan int)
+
+	go isahead(path, branch, cmod)
+	ahead := <-cmod
+	fmt.Print(ahead)
 	if ahead != 0 {
-		return nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(ahead)+`x]`)
+		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(ahead)+`x]`)
 	}
 
-	return nm
+	status <- nm
 }
