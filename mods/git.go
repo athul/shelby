@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -52,8 +53,8 @@ func currentGitBranch(gitDir string) string {
 		return "detached"
 	}
 
-	refSpecDisplay := strings.TrimPrefix(refSpec, "ref: refs/heads/")
-	return refSpecDisplay
+	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
+	return branch
 }
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")
@@ -107,5 +108,18 @@ func iscontentmodified(path string) ismodified {
 
 	}
 	stats := parseGitStats(status)
+
 	return stats
+}
+func isahead(path string, branch string, cmod chan int) {
+	mods := ismodified{}
+
+	out, err := rungitcommands("git", "rev-list", "origin/"+branch+"...HEAD", "--ignore-submodules", "--count")
+	if err != nil {
+
+	}
+	ah, err := strconv.Atoi(out)
+	mods.ahead = ah
+	//fmt.Print(ah)
+	cmod <- mods.ahead
 }
