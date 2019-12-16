@@ -120,6 +120,6 @@ func isahead(path string, branch string, cmod chan int) {
 	}
 	ah, err := strconv.Atoi(out)
 	mods.ahead = ah
-	fmt.Print(ah)
+	//fmt.Print(ah)
 	cmod <- mods.ahead
 }
