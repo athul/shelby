@@ -26,7 +26,7 @@ jobs:
 
     - name: Build
       run: |
-        go build -v -ldflags=\"-s -w\"
+        go build -v .
         ls
     - name: Download artifact
       uses: actions/download-artifact@v1.0.0
