@@ -28,7 +28,10 @@ jobs:
       run: |
         go build -v .
         ls
-    - name: Download artifact
-      uses: actions/download-artifact@v1.0.0
-      with:
-        name: shelby
+    - name: Statusoli	
+      uses: athul/statusoli@master	
+      if: always()	
+      with:	
+        chat: ${{ secrets.chat }}	
+        token: ${{ secrets.token }}	
+        status: ${{ job.status }}
