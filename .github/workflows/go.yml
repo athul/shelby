@@ -1,4 +1,4 @@
-name: Go
+name: Go Build
 on: [push]
 jobs:
 
@@ -26,7 +26,7 @@ jobs:
 
     - name: Build
       run: |
-        go build -v -ldflags="-s -w".
+        go build -v -ldflags=\"-s -w\"
         ls
     - name: Download artifact
       uses: actions/download-artifact@v1.0.0
