@@ -4,7 +4,12 @@ Shelby is a fast :rocket: ,lightweight 💨 ,minimal🧸, shell prompt written i
 
 ![](/shelby.gif)
 
------
+-------
+**Here are some Benchmark Results**
+![](/b1.png)
+![](/b2.png)
+
+-------
 ## Installation
 Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
 - Run
