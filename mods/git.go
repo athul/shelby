@@ -40,21 +40,21 @@ func findGitRepo(path string) (string, error) {
 
 	return gitEntry, nil
 }
-func currentGitBranch(gitDir string) string {
+func currentGitBranch(gitDir string, c1 chan string) {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
 		handleError(err)
-		return "unknown"
+		c1 <- "unknown"
 	}
 	refSpec := strings.TrimSpace(string(bytes))
 
 	// detached HEAD?
 	if !strings.HasPrefix(refSpec, "ref: refs/") {
-		return "detached"
+		c1 <- "detached"
 	}
 
 	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
-	return branch
+	c1 <- branch
 }
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")

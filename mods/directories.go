@@ -12,7 +12,7 @@ import (
 // getDir returns information regarding the current working directory.
 func getDir(cwd string) string {
 	if cwd == "/" {
-		return color.Sprintf(color.Blue, cwd)
+		return color.Sprintf(color.BrightCyan, cwd)
 	}
 
 	nearestAccessiblePath := findNearestAccessiblePath(cwd)
@@ -51,10 +51,11 @@ func findNearestAccessiblePath(path string) string {
 }
 
 func findstatus(mods ismodified, path string, gdir string, status chan string) {
-
-	branch := currentGitBranch(gdir)
-	nm := color.Sprintf(color.Magenta, path) + " on " +
-		color.Sprintf(color.Green, ` `+branch)
+	branchchannel := make(chan string)
+	go currentGitBranch(gdir, branchchannel)
+	branch := <-branchchannel
+	nm := color.Sprintf(color.BrightYellow, path) + " on " +
+		color.Sprintf(color.BrightGreen, ` `+branch)
 	if mods.notStaged != 0 && mods.untracked != 0 {
 		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.notStaged)+`!]`+`[`+strconv.Itoa(mods.untracked)+`+]`)
 	}

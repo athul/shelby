@@ -1,7 +1,6 @@
 package mods
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -34,13 +33,7 @@ func handleError(err error) {
 func getExitCodeField(arg string) string {
 	exitCode, err := strconv.Atoi(arg)
 	if err == nil && exitCode > 0 {
-		return withColor("1;31", "exit:"+arg)
+		return color.Sprintf(color.BrightRed, "exit:"+arg)
 	}
 	return ""
-}
-func withColor(color, text string) string {
-	if color == "0" {
-		return text
-	}
-	return fmt.Sprintf("\x1B[%sm%s\x1B[0m", color, text)
 }
