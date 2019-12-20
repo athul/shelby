@@ -1,6 +1,6 @@
 # Shelby [![Build Status](https://travis-ci.org/athul/shelby.svg?branch=master)](https://travis-ci.org/athul/shelby) ![](https://github.com/athul/shelby/workflows/StarBoy/badge.svg) [![Go Report Card](https://goreportcard.com/badge/github.com/athul/shelby)](https://goreportcard.com/report/github.com/athul/shelby)
 
-Shelby is a fast :rocket: ,lightweight 💨 ,minimal🧸, shell prompt written in Pure Go. 
+Shelby is a fast 🚀 ,lightweight 🎈 ,minimal✨, shell prompt written in Pure Go. 
 
 ![](/shelby.gif)
 
@@ -30,6 +30,13 @@ OR
 - Move the Binary to `/usr/local/bin/`
 
 I hope this gets improved soon
+### Extra Bits
+- `[+]` shows if you've got Untracked Files
+  - `[2+]` shows if you've got 2 untracked files
+- `[!]` shows if you've got Unstaged Files
+  - `[3!]` shows if you've got 3 unstaged files
+- Displays **Hostname** of the machine while in SSH
+
 ## Usage
 
 The following usage examples are just one example of how Shelby can be
@@ -71,4 +78,4 @@ PROMPT="%(?.%F{magenta}.%F{red})${prompt_symbol}%f "
 
 **Most of the code is derived from** :heart:
 - [Mímir by @talal](https://github.com/talal/mimir)
-- [Gofu by @majewsky](https://github.com/majewsky/gofu#prettyprompt)
+- [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
