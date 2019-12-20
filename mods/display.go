@@ -2,6 +2,7 @@ package mods
 
 import (
 	"os"
+	"path"
 	"strconv"
 	"strings"
 
@@ -22,15 +23,6 @@ func findstatus(mods ismodified, path string, gdir string, status chan string) {
 	if mods.untracked != 0 {
 		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.untracked)+`+]`)
 	}
-	cmod := make(chan int)
-
-	go isahead(path, branch, cmod)
-	ahead := <-cmod
-	//fmt.Print(ahead)
-	if ahead != 0 {
-		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(ahead)+`x]`)
-	}
-
 	status <- nm
 }
 func gethost() string {
@@ -43,4 +35,9 @@ func isssh(probs chan bool) {
 		probs <- true
 	}
 	probs <- false
+}
+func getenv() string {
+	env := os.Getenv("VIRTUAL_ENV")
+	venv := path.Base(env)
+	return venv
 }

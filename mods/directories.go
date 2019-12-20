@@ -29,15 +29,21 @@ func getDir(cwd string) string {
 	gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
-
+	env := getenv()
 	isconmod := iscontentmodified(gitDir)
-
+	if gitDir != "" && env != "" && env != "." {
+		status := make(chan string)
+		go findstatus(isconmod, gbpath, gitDir, status)
+		imod := <-status
+		return imod + color.Sprintf(color.BrightBlack, "("+env+")")
+	}
 	if gitDir != "" {
 		status := make(chan string)
 		go findstatus(isconmod, gbpath, gitDir, status)
 		imod := <-status
 		return imod
 	}
+
 	return color.Sprintf(color.BrightCyan, pathToDisplay)
 }
 
