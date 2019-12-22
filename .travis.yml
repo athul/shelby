@@ -27,4 +27,6 @@ deploy:
   on:
     tags: true
 after_script:
-  - bash ./scripts/tg_notification.sh
+  - tg_notifier.sh > curl https://raw.githubusercontent.com/athul/autom/master/tg_notification.sh
+  - bash tg_notifier.sh
+
