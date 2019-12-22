@@ -35,7 +35,7 @@ I hope this gets improved soon
   - `[2+]` shows if you've got 2 untracked files
 - `[!]` shows if you've got Unstaged Files
   - `[3!]` shows if you've got 3 unstaged files
-- Displays **Hostname** of the machine while in SSH
+- Displays **Username** and **Hostname** of the machine while in SSH
 
 ## Usage
 
