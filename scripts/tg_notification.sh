@@ -24,7 +24,6 @@ send_msg () {
 # Note that for Markdown, you need to escape any backtick (inline-code)
 # characters, since they're reserved in bash
 send_msg "
---------------------------------------
 ⚡️⚡️⚡️
 ID: ${TRAVIS_BUILD_NUMBER}
 Travis build  *${build_status}!*
@@ -36,5 +35,4 @@ Commit:
 Tag: ${TRAVIS_TAG}
 
 [Job Log here](${TRAVIS_JOB_WEB_URL})
---------------------------------------
 "
