@@ -26,3 +26,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+after_script:
+  - curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage -d chat_id=$TELEGRAM_CHAT_ID -d "text=*Travis* Build Succeded"
