@@ -25,16 +25,14 @@ send_msg () {
 # characters, since they're reserved in bash
 send_msg "
 --------------------------------------
-Travis build #${TRAVIS_BUILD_ID} *${build_status}!*
+ID: ${TRAVIS_BUILD_ID}
+Travis build  *${build_status}!*
 \`Repository:  ${TRAVIS_REPO_SLUG}\`
 \`Branch:      ${TRAVIS_BRANCH}\`
-\Commit:      *${TRAVIS_COMMIT}*\
-\Commit Message:     **${TRAVIS_COMMIT_MESSAGE}**\
+Commit:
+*${TRAVIS_COMMIT}*||**${TRAVIS_COMMIT_MESSAGE}**\
 
 
 [Job Log here](${TRAVIS_JOB_WEB_URL})
-
-
-Tag: ${TRAVIS_TAG}
 --------------------------------------
 "
