@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strconv"
 	"strings"
 )
 
@@ -110,16 +109,4 @@ func iscontentmodified(path string) ismodified {
 	stats := parseGitStats(status)
 
 	return stats
-}
-func isahead(path string, branch string, cmod chan int) {
-	mods := ismodified{}
-
-	out, err := rungitcommands("git", "rev-list", "origin/"+branch+"...HEAD", "--ignore-submodules", "--count")
-	if err != nil {
-
-	}
-	ah, err := strconv.Atoi(out)
-	mods.ahead = ah
-	//fmt.Print(ah)
-	cmod <- mods.ahead
 }

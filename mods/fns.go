@@ -9,7 +9,7 @@ import (
 	"github.com/talal/go-bits/color"
 )
 
-var host = gethost()
+//var host = gethost()
 
 func cwdir() string {
 	wd, err := os.Getwd()
@@ -28,9 +28,9 @@ func stripHomeDir(path string) string {
 	ssh := make(chan bool)
 	go isssh(ssh)
 	sshtrue := <-ssh
-	host := gethost()
+	name, host := gethost()
 	if sshtrue == true {
-		return strings.Replace(path, os.Getenv("HOME"), color.Sprintf(color.BrightGreen, host)+" ~", 1)
+		return strings.Replace(path, os.Getenv("HOME"), color.Sprintf(color.BrightGreen, name+" on "+host)+" ~", 1)
 	}
 	return strings.Replace(path, os.Getenv("HOME"), "~", 1)
 }
