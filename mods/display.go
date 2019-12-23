@@ -1,10 +1,7 @@
 package mods
 
 import (
-	"os"
-	"path"
 	"strconv"
-	"strings"
 
 	"github.com/talal/go-bits/color"
 )
@@ -24,21 +21,4 @@ func findstatus(mods ismodified, path string, gdir string, status chan string) {
 		status <- nm + color.Sprintf(color.BrightRed, ` [`+strconv.Itoa(mods.untracked)+`+]`)
 	}
 	status <- nm
-}
-func gethost() (string, string) {
-	hname, _ := os.Hostname()
-	uname := os.Getenv("USER")
-	return uname, strings.SplitN(hname, ".", 2)[0]
-}
-func isssh(probs chan bool) {
-	cmd := os.Getenv("SSH_CLIENT")
-	if cmd != "" {
-		probs <- true
-	}
-	probs <- false
-}
-func getenv() string {
-	env := os.Getenv("VIRTUAL_ENV")
-	venv := path.Base(env)
-	return venv
 }
