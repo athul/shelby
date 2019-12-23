@@ -51,7 +51,7 @@ Add this to your `.bashrc` file:
 ```bash
 prompt_shelby_load() {
   if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;31m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[1;32m\]❯\[\e[0m\]"
   else
     local prompt_symbol="\[\e[0;35m\]❯\[\e[0m\]"
   fi
@@ -71,11 +71,11 @@ prompt_shelby_load() { /path/to/shelby } #change it with the original path
 add-zsh-hook precmd prompt_shelby_load
 
 prompt_symbol='❯'
-PROMPT="%(?.%F{magenta}.%F{red})${prompt_symbol}%f "
+PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
 ```
 
 ### Its Still in WIP :sweat_smile:
 
-**Most of the code is derived from** :heart:
+**Most of the logic is derived from** :heart:
 - [Mímir by @talal](https://github.com/talal/mimir)
 - [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
