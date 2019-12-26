@@ -74,7 +74,9 @@ prompt_symbol='❯'
 PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
 ```
 
-### Its Still in WIP :sweat_smile:
+### Inspired From
+- [StarShip by @matchai](https://starship.rs)
+- [SpaceShip by @denysdovhan](https://github.com/denysdovhan/spaceship-prompt)
 
 **Most of the logic is derived from** :heart:
 - [Mímir by @talal](https://github.com/talal/mimir)
