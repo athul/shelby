@@ -92,3 +92,5 @@ PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
 
 ## Support My work
 <a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
+**Logo Made by** [Sreeram aka @fillerink](https://github.com/fillerink)
