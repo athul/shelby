@@ -1,13 +1,19 @@
-# Shelby [![Build Status](https://travis-ci.org/athul/shelby.svg?branch=master)](https://travis-ci.org/athul/shelby) ![](https://github.com/athul/shelby/workflows/StarBoy/badge.svg) [![Go Report Card](https://goreportcard.com/badge/github.com/athul/shelby)](https://goreportcard.com/report/github.com/athul/shelby)
+<p align="center"><img src="/assets/shelby_logo.png" width="350px"/></p>
+
+<div align="center">
+
+[![Build Status](https://travis-ci.org/athul/shelby.svg?branch=master)](https://travis-ci.org/athul/shelby) ![](https://github.com/athul/shelby/workflows/StarBoy/badge.svg) [![Go Report Card](https://goreportcard.com/badge/github.com/athul/shelby)](https://goreportcard.com/report/github.com/athul/shelby)
+
+</div>
 
 Shelby is a fast 🚀 ,lightweight 🎈 ,minimal✨, shell prompt written in Pure Go. 
 
-![](/shelby.gif)
+![](assets/shelby.gif)
 
 -------
 **Here are some Benchmark Results**
-![](/b1.png)
-![](/b2.png)
+![](assets/b1.png)
+![](assets/b2.png)
 
 -------
 ## Installation
