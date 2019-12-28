@@ -11,11 +11,6 @@ Shelby is a fast 🚀 ,lightweight 🎈 ,minimal✨, shell prompt written in Pur
 ![](assets/shelby.gif)
 
 -------
-**Here are some Benchmark Results**
-![](assets/b1.png)
-![](assets/b2.png)
-
--------
 ## Installation
 Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
 - Run
