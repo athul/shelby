@@ -6,7 +6,7 @@
 
 </div>
 
-Shelby is a fast 🚀 ,lightweight 🎈 ,minimal✨, shell prompt written in Pure Go. 
+Shelby is a fast ⚡️ ,lightweight 🎈 ,minimal✨, shell prompt written in Pure Go. 
 
 ![](assets/shelby.gif)
 
