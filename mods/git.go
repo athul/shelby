@@ -10,13 +10,8 @@ import (
 )
 
 type ismodified struct {
-	ahead      int
-	behind     int
-	untracked  int
-	notStaged  int
-	staged     int
-	conflicted int
-	stashed    int
+	untracked int
+	notStaged int
 }
 
 func findGitRepo(path string) (string, error) {
@@ -84,13 +79,7 @@ func parseGitStats(status []string) ismodified {
 				switch code {
 				case "??":
 					stats.untracked++
-				case "DD", "AU", "UD", "UA", "DU", "AA", "UU":
-					stats.conflicted++
 				default:
-					if code[0] != ' ' {
-						stats.staged++
-					}
-
 					if code[1] != ' ' {
 						stats.notStaged++
 					}
