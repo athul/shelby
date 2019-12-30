@@ -53,10 +53,10 @@ Add this to your `.bashrc` file:
 
 ```bash
 prompt_shelby_load() {
-  if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[1;32m\]❯\[\e[0m\]"
+if [ $? != 0 ]; then
+    local prompt_symbol="\[\e[0;31m\]❯\[\e[0m\]"
   else
-    local prompt_symbol="\[\e[0;35m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;32m\]❯\[\e[0m\]"
   fi
 
   PS1="$(/path/to/shelby)\n${prompt_symbol} " #change it with the original path
