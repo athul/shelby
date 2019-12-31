@@ -5,10 +5,19 @@ before:
     # you may remove this if you don't use vgo
     - go mod tidy
     # you may remove this if you don't need go generate
-    - go generate ./...
+    - go get -v 
 builds:
-- env:
-  - CGO_ENABLED=0
+- 
+
+  env:
+    - CGO_ENABLED=0
+  ldflags:
+    - -s -w 
+  goos:
+    - darwin
+    - linux
+  goarch:
+    - amd64
 archives:
 - replacements:
     darwin: Darwin
@@ -24,3 +33,7 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+release:
+  github:
+    owner: athul
+    name: shelby

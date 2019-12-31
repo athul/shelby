@@ -4,28 +4,18 @@ language: go
 go:
   - "1.13"
 before_script:
-  - go get
-
+  - go get -v
+  - go build
+  - rm -rf shelby
+#
 # before we deploy, we go build for all operating systems we would like to support
-before_deploy:
-  - mkdir -p release
-  - "GOOS=linux  GOARCH=amd64 go build -o release/shelby-linux-amd64 -ldflags=\"-s -w\" "
-  - "GOOS=darwin GOARCH=amd64 go build -o release/shelby-darwin-amd64 -ldflags=\"-s -w\""
-  - "tar -cvzf release/shelby-darwin-amd64.tar.gz release/shelby-darwin-amd64"
-  - "tar -cvzf release/shelby-linux-amd64.tar.gz release/shelby-linux-amd64"
-
 deploy:
-  provider: releases
-  api_key:
-    secure: "$GITHUB_API_KEY"
-  file:
-    - "release/shelby-linux-amd64"
-    - "release/shelby-darwin-amd64"
-    - "release/shelby-darwin-amd64.tar.gz"
-    - "release/shelby-linux-amd64.tar.gz"
+- provider: script
   skip_cleanup: true
+  script: curl -sL https://git.io/goreleaser | bash
   on:
     tags: true
+    
 after_script:
   - curl https://raw.githubusercontent.com/athul/autom/master/tg_notification.sh > tg_notifier.sh
   - bash tg_notifier.sh

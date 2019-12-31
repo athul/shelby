@@ -1,0 +1,21 @@
+name: IssueGuy	
+
+on:
+  pull_request:
+    types: [assigned, opened,reopened]
+  issues:
+    types: [opened,closed,reopened,assigned]	
+
+jobs:	
+  build:	
+
+    runs-on: ubuntu-latest	
+
+    steps:	
+      - name: Statusoli	
+        uses: athul/statusoli@notifier
+        if: always()	
+        with:	
+          chat: ${{ secrets.chat }}	
+          token: ${{ secrets.token }}	
+          status: ${{ job.status }}
