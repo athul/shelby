@@ -12,6 +12,7 @@ import (
 type ismodified struct {
 	untracked int
 	notStaged int
+	staged    int
 }
 
 func findGitRepo(path string) (string, error) {
@@ -34,21 +35,21 @@ func findGitRepo(path string) (string, error) {
 
 	return gitEntry, nil
 }
-func currentGitBranch(gitDir string, c1 chan string) {
+func currentGitBranch(gitDir string) string {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
 		handleError(err)
-		c1 <- "unknown"
+		return "unknown"
 	}
 	refSpec := strings.TrimSpace(string(bytes))
 
 	// detached HEAD?
 	if !strings.HasPrefix(refSpec, "ref: refs/") {
-		c1 <- "detached"
+		return "detached"
 	}
 
 	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
-	c1 <- branch
+	return branch
 }
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")
@@ -79,6 +80,8 @@ func parseGitStats(status []string) ismodified {
 				switch code {
 				case "??":
 					stats.untracked++
+				case "M":
+
 				default:
 					if code[1] != ' ' {
 						stats.notStaged++
