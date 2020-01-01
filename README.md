@@ -59,7 +59,7 @@ if [ $? != 0 ]; then
     local prompt_symbol="\[\e[0;32m\]❯\[\e[0m\]"
   fi
 
-  PS1="$(/path/to/shelby)\n${prompt_symbol} " #change it with the original path
+  PS1="$(~/.local/bin/shelby)\n${prompt_symbol} " 
 }
 PROMPT_COMMAND=prompt_shelby_load
 ```
@@ -70,7 +70,7 @@ Add this to your `.zshrc` file:
 
 ```zsh
 autoload -Uz add-zsh-hook
-prompt_shelby_load() { /path/to/shelby } #change it with the original path
+prompt_shelby_load() { ~/.local/bin/shelby } 
 add-zsh-hook precmd prompt_shelby_load
 
 prompt_symbol='❯'
