@@ -15,7 +15,7 @@ Shelby is a fast ⚡️ ,lightweight 🎈 ,minimal✨, shell prompt written in P
 Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
 - Run
 ```bash
-$ sh -c "$(curl -sL https://git.io/getshelby)"	
+$ sh -c "$(curl -sL https://git.io/ishelby)"	
 ```
 ----
 OR
@@ -86,6 +86,8 @@ PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
 - [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
 
 ## Support My work
-<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 20px !important;width: 217px !important;" ></a>
 
 **Logo Made by** [Sreeram aka @fillerink](https://github.com/fillerink)
+
+The Installation Script can be found at https://github.com/athul/autom
