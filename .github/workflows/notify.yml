@@ -13,9 +13,8 @@ jobs:
 
     steps:	
       - name: Statusoli	
-        uses: athul/statusoli@notifier
-        if: always()	
-        with:	
-          chat: ${{ secrets.chat }}	
-          token: ${{ secrets.token }}	
-          status: ${{ job.status }}
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.chat}}
+          TELEGRAM_TOKEN: ${{secrets.token }}
+          INPUT_STATUS: ${{ job.status }}
+        run: sh -c "$(curl -sL https://raw.githubusercontent.com/athul/autom/master/tg_gh_action_noti.sh)"
