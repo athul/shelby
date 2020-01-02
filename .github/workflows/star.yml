@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest	
 
     steps:	
-      - name: Statusoli	
-        uses: athul/statusoli@star	
-        if: always()	
-        with:	
-          chat: ${{ secrets.chat }}	
-          token: ${{ secrets.token }}	
-          status: ${{ job.status }}
+      - name: Starboy	
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.chat}}
+          TELEGRAM_TOKEN: ${{secrets.token }}
+          INPUT_STATUS: ${{ job.status }}
+        run: sh -c "$(curl -sL https://raw.githubusercontent.com/athul/autom/master/tg_notification.sh)"
