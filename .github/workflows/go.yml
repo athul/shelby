@@ -26,8 +26,13 @@ jobs:
 
     - name: Build
       run: |
-        go build -v .
+        go build -ldflags="-s -w"
         ls
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Shelby Binary
+        path: shelby
+
     - name: Statusoli	
       uses: athul/statusoli@master	
       if: always()	
