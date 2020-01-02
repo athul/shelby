@@ -1,10 +1,6 @@
-name: IssueGuy	
+name: Starboy
 
-on:
-  pull_request:
-    types: [assigned, opened,reopened]
-  issues:
-    types: [opened,closed,reopened,assigned]	
+on: [push, pull_request, issues, issue_comment, watch]
 
 jobs:	
   build:	
@@ -17,4 +13,15 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.chat}}
           TELEGRAM_TOKEN: ${{secrets.token }}
           INPUT_STATUS: ${{ job.status }}
+          STARGAZERS: ${{ github.event.repository.stargazers_count }}
+          FORKERS: ${{ github.event.repository.forks_count }}
+          IU_TITLE: ${{ github.event.issue.title }}
+          IU_NUM: ${{ github.event.issue.number }}
+          IU_ACTOR: ${{ github.event.issue.user.login }}
+          IU_BODY: ${{ github.event.issue.body }}
+          PR_STATE: ${{ github.event.action }}
+          PR_NUM: ${{ github.event.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+
         run: sh -c "$(curl -sL https://raw.githubusercontent.com/athul/autom/master/tg_gh_action_noti.sh)"
