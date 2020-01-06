@@ -5,6 +5,8 @@ go:
   - "1.13"
 before_script:
   - go get -v
+  - git submodule update --init # get libgit2
+  - make install-static
   - go build
   - rm -rf shelby
 #
