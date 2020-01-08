@@ -1,14 +1,24 @@
 name: Starboy
 
-on: [push, pull_request, issues, issue_comment, watch]
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened,closed]
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created]
+  watch:
+    types: [started]
 
-jobs:	
-  build:	
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest	
-
-    steps:	
-      - name: Statusoli	
+    steps:
+      - name: Statusoli
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.chat}}
           TELEGRAM_TOKEN: ${{secrets.token }}
