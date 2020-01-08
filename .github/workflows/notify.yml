@@ -1,27 +1,39 @@
 name: Starboy
 
-on: [push, pull_request, issues, issue_comment, watch]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, closed]
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created]
+  watch:
+    types: [started]
 
-jobs:	
-  build:	
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest	
-
-    steps:	
-      - name: Statusoli	
+    steps:
+      - name: Statusoli
+        uses: athul/statusoli@master
         env:
-          TELEGRAM_CHAT_ID: ${{ secrets.chat}}
-          TELEGRAM_TOKEN: ${{secrets.token }}
-          INPUT_STATUS: ${{ job.status }}
           STARGAZERS: ${{ github.event.repository.stargazers_count }}
           FORKERS: ${{ github.event.repository.forks_count }}
           IU_TITLE: ${{ github.event.issue.title }}
           IU_NUM: ${{ github.event.issue.number }}
           IU_ACTOR: ${{ github.event.issue.user.login }}
+          IU_COM: ${{github.event.comment.body}}
           IU_BODY: ${{ github.event.issue.body }}
           PR_STATE: ${{ github.event.action }}
           PR_NUM: ${{ github.event.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
-
-        run: sh -c "$(curl -sL https://raw.githubusercontent.com/athul/autom/master/tg_gh_action_noti.sh)"
+        if: always()
+        with:
+          chat: ${{secrets.chat}}
+          token: ${{secrets.token}}
+          status: ${{job.status}}
