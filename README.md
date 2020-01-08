@@ -12,35 +12,27 @@ Shelby is a fast ⚡️ ,lightweight 🎈 ,minimal✨, shell prompt written in P
 
 -------
 ## Installation
-Initially the Packaging is so dull and I'm really new to this stuff. Follow the steps below,
+Follow the steps below, and **Post Installation Instructions**
 - Run
 ```bash
 $ sh -c "$(curl -sL https://git.io/ishelby)"	
 ```
 ----
 OR
-- Download the binary from the [Releases](https://github.com/athul/shelby/releases) page
+- Download the binary from the [WorkFlow Artifacts](https://github.com/athul/shelby/actions?query=workflow%3A%22Go+Build%22).
+- You might wanto to make the binary executable, run `chmod 775 <binary_name>`
 - Move the Binary to `/usr/local/bin/`
-- Enjoy :tada:
 
-OR
+Build From Source
 
 - Clone the Repo
 - Run `go get -v`
 - Run `go build`
-- Move the Binary to `/usr/local/bin/`
+- Move the Binary to `~/.local/bin/shelby`
 
-### Extra Bits
-- `[+]` shows if you've got Untracked Files
-  - `[2+]` shows if you've got 2 untracked files
-- `[!]` shows if you've got Unstaged Files
-  - `[3!]` shows if you've got 3 unstaged files
-- Dispalys any VirtualENVs you're working in
-- Displays the Current Git Branch
-- Displays **Username** and **Hostname** of the machine while in SSH
-- Small Size(~=2MB)
+## Post Installation Instructions
 
-## Usage
+> You must have to add the below code to either the Bashrc or Zshrc file inorder to Shelby to fully work.
 
 The following usage examples are just one example of how Shelby can be
 configured. The examples below will result in a setup similar to the one shown
@@ -76,6 +68,18 @@ add-zsh-hook precmd prompt_shelby_load
 prompt_symbol='❯'
 PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
 ```
+
+
+### Extra Bits
+- `[+]` shows if you've got Untracked Files
+  - `[2+]` shows if you've got 2 untracked files
+- `[!]` shows if you've got Unstaged Files
+  - `[3!]` shows if you've got 3 unstaged files
+- Dispalys any VirtualENVs you're working in
+- Displays the Current Git Branch
+- Displays **Username** and **Hostname** of the machine while in SSH
+- Small Size(~=2MB)
+
 
 ### Inspired From
 - [StarShip by @matchai](https://starship.rs)
