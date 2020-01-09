@@ -10,9 +10,12 @@ import (
 )
 
 type ismodified struct {
+	utrbool   bool
+	ustbool   bool
 	untracked int
 	notStaged int
 	staged    int
+	state     string
 }
 
 func findGitRepo(path string) (string, error) {
@@ -80,11 +83,15 @@ func parseGitStats(status []string) ismodified {
 				switch code {
 				case "??":
 					stats.untracked++
-				case "M":
-
+					stats.utrbool = true
 				default:
+					if code[0] != ' ' {
+						stats.staged++
+
+					}
 					if code[1] != ' ' {
 						stats.notStaged++
+						stats.ustbool = true
 					}
 				}
 			}
@@ -92,13 +99,25 @@ func parseGitStats(status []string) ismodified {
 	}
 	return stats
 }
-func iscontentmodified(path string) ismodified {
+func iscontentmodified() ismodified {
 	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
 	if err != nil {
 
 	}
 	stats := parseGitStats(status)
+	outstat, err := rungitcommands("git", "status", "-u", "no")
+	if err != nil {
 
+	}
+	if strings.ContainsAny(outstat, "ahead") {
+		stats.state = "ahead"
+	}
+	if strings.ContainsAny(outstat, "behind") {
+		stats.state = "behind"
+	}
+	if strings.ContainsAny(outstat, "ahead") && strings.ContainsAny(outstat, "behind") {
+		stats.state = "both"
+	}
 	return stats
 }
