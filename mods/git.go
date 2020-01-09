@@ -112,7 +112,7 @@ func iscontentmodified() ismodified {
 	}
 	ah := strings.Contains(outstat, "ahead")
 	bh := strings.Contains(outstat, "behind")
-	uptd := strings.Contains(outstat, "clean")
+	uptd := strings.Contains(outstat, "diverged")
 	if ah {
 		stats.state = "ahead"
 	} else if bh == true {
