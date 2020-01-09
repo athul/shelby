@@ -30,6 +30,7 @@ func dispstats(m ismodified, path string, gdir string, status chan string) {
 		"ahead":  "↑",
 		"behind": "↓",
 		"both":   "⇅",
+		"clean":  "",
 	}
 	ius := "!"
 	itr := "+"
@@ -47,7 +48,7 @@ func dispstats(m ismodified, path string, gdir string, status chan string) {
 		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s] %s", ntrc_count, itr, stt))
 	}
 	if m.ustbool == false && m.utrbool == false {
-		status <- nm + color.Sprintf(color.BrightRed, stt)
+		status <- nm + color.Sprintf(color.BrightBlue, " "+stt)
 	}
 
 }

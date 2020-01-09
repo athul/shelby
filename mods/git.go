@@ -119,6 +119,8 @@ func iscontentmodified() ismodified {
 		stats.state = "behind"
 	} else if uptd == true {
 		stats.state = "both"
+	} else {
+		stats.state = "clean"
 	}
 	return stats
 }
