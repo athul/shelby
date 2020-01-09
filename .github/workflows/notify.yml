@@ -2,8 +2,6 @@ name: Starboy
 
 on:
   push:
-    branches:
-      - master
   pull_request:
     types: [opened, closed]
   issues:
@@ -34,6 +32,6 @@ jobs:
           PR_BODY: ${{ github.event.pull_request.body }}
         if: always()
         with:
-          chat: ${{secrets.chat}}
-          token: ${{secrets.token}}
-          status: ${{job.status}}
+          chat: ${{ secrets.chat }}
+          token: ${{ secrets.token }}
+          status: ${{ job.status }}

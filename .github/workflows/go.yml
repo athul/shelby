@@ -1,5 +1,8 @@
 name: Go Build
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 jobs:
 
   build:
