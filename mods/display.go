@@ -31,23 +31,23 @@ func dispstats(m ismodified, path string, gdir string, status chan string) {
 		"behind": "↓",
 		"both":   "⇅",
 	}
-	ius := "+"
-	itr := "!"
+	ius := "!"
+	itr := "+"
 	nstg_count := strconv.Itoa(m.notStaged)
 	ntrc_count := strconv.Itoa(m.untracked)
 	stt := states[m.state]
 
 	if m.utrbool == true && m.ustbool == true {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf("[%s%s][%s%s]%s", nstg_count, ius, ntrc_count, itr, stt))
+		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s][%s%s] %s", nstg_count, ius, ntrc_count, itr, stt))
 	}
 	if m.utrbool == false && m.ustbool == true {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf("[%s%s]%s", nstg_count, ius, stt))
+		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s] %s", nstg_count, ius, stt))
 	}
 	if m.utrbool == true && m.ustbool == false {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf("[%s%s]%s", ntrc_count, itr, stt))
+		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s] %s", ntrc_count, itr, stt))
 	}
 	if m.ustbool == false && m.utrbool == false {
-		status <- nm
+		status <- nm + color.Sprintf(color.BrightRed, stt)
 	}
 
 }

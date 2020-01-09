@@ -110,13 +110,14 @@ func iscontentmodified() ismodified {
 	if err != nil {
 
 	}
-	if strings.ContainsAny(outstat, "ahead") {
+	ah := strings.Contains(outstat, "ahead")
+	bh := strings.Contains(outstat, "behind")
+	uptd := strings.Contains(outstat, "clean")
+	if ah {
 		stats.state = "ahead"
-	}
-	if strings.ContainsAny(outstat, "behind") {
+	} else if bh == true {
 		stats.state = "behind"
-	}
-	if strings.ContainsAny(outstat, "ahead") && strings.ContainsAny(outstat, "behind") {
+	} else if uptd == true {
 		stats.state = "both"
 	}
 	return stats
