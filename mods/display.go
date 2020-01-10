@@ -30,7 +30,6 @@ func dispstats(m ismodified, path string, gdir string, status chan string) {
 		"ahead":  "↑",
 		"behind": "↓",
 		"both":   "⇅",
-		"clean":  "✌︎",
 	}
 	ius := "!"
 	itr := "+"

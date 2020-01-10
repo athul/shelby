@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var dir string = cwdir()
+
 type ismodified struct {
 	utrbool   bool
 	ustbool   bool
@@ -99,7 +101,7 @@ func parseGitStats(status []string) ismodified {
 	}
 	return stats
 }
-func iscontentmodified() ismodified {
+func iscontentmodified(path string) ismodified {
 	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
 	if err != nil {
@@ -107,20 +109,19 @@ func iscontentmodified() ismodified {
 	}
 	stats := parseGitStats(status)
 	outstat, err := rungitcommands("git", "status", "-u", "no")
-	if err != nil {
 
-	}
-	ah := strings.Contains(outstat, "ahead")
-	bh := strings.Contains(outstat, "behind")
-	uptd := strings.Contains(outstat, "diverged")
-	if ah {
+	if strings.Contains(outstat, "ahead") {
 		stats.state = "ahead"
-	} else if bh == true {
+	} else if strings.Contains(outstat, "behind") == true {
 		stats.state = "behind"
-	} else if uptd == true {
+	} else if strings.Contains(outstat, "diverged") == true {
 		stats.state = "both"
 	} else {
 		stats.state = "clean"
 	}
+	if err != nil {
+
+	}
 	return stats
+
 }

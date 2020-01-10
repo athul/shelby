@@ -30,14 +30,16 @@ func getDir(cwd string) string {
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
 	env := getenv()
-	isconmod := iscontentmodified()
+
 	if gitDir != "" && env != "" && env != "." {
+		isconmod := iscontentmodified(gitDir)
 		status := make(chan string)
 		go dispstats(isconmod, gbpath, gitDir, status)
 		imod := <-status
 		return imod + color.Sprintf(color.BrightBlack, "("+env+")")
 	}
 	if gitDir != "" {
+		isconmod := iscontentmodified(gitDir)
 		status := make(chan string)
 		go dispstats(isconmod, gbpath, gitDir, status)
 		imod := <-status
