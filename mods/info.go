@@ -16,6 +16,5 @@ func Info() string {
 
 	info := make([]string, 1)
 	info = emptifier(info, getDir(cwd))
-	return strings.Join(info, " ")
-
+	return strings.Join(info, "")
 }

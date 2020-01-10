@@ -9,9 +9,15 @@ import (
 	"strings"
 )
 
+var dir string = cwdir()
+
 type ismodified struct {
+	utrbool   bool
+	ustbool   bool
 	untracked int
 	notStaged int
+	staged    int
+	state     string
 }
 
 func findGitRepo(path string) (string, error) {
@@ -34,21 +40,21 @@ func findGitRepo(path string) (string, error) {
 
 	return gitEntry, nil
 }
-func currentGitBranch(gitDir string, c1 chan string) {
+func currentGitBranch(gitDir string) string {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
 		handleError(err)
-		c1 <- "unknown"
+		return "unknown"
 	}
 	refSpec := strings.TrimSpace(string(bytes))
 
 	// detached HEAD?
 	if !strings.HasPrefix(refSpec, "ref: refs/") {
-		c1 <- "detached"
+		return "detached"
 	}
 
 	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
-	c1 <- branch
+	return branch
 }
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")
@@ -79,9 +85,15 @@ func parseGitStats(status []string) ismodified {
 				switch code {
 				case "??":
 					stats.untracked++
+					stats.utrbool = true
 				default:
+					if code[0] != ' ' {
+						stats.staged++
+
+					}
 					if code[1] != ' ' {
 						stats.notStaged++
+						stats.ustbool = true
 					}
 				}
 			}
@@ -96,6 +108,20 @@ func iscontentmodified(path string) ismodified {
 
 	}
 	stats := parseGitStats(status)
+	outstat, err := rungitcommands("git", "status", "-u", "no")
 
+	if strings.Contains(outstat, "ahead") {
+		stats.state = "ahead"
+	} else if strings.Contains(outstat, "behind") == true {
+		stats.state = "behind"
+	} else if strings.Contains(outstat, "diverged") == true {
+		stats.state = "both"
+	} else {
+		stats.state = "clean"
+	}
+	if err != nil {
+
+	}
 	return stats
+
 }

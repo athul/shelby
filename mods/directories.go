@@ -26,20 +26,22 @@ func getDir(cwd string) string {
 
 	pathToDisplay := stripHomeDir(cwd)
 	//pathToDisplay = shortenLongPath(pathToDisplay, 2)
-	gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
+	//gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
 	env := getenv()
-	isconmod := iscontentmodified(gitDir)
+
 	if gitDir != "" && env != "" && env != "." {
+		isconmod := iscontentmodified(gitDir)
 		status := make(chan string)
-		go findstatus(isconmod, gbpath, gitDir, status)
+		go dispstats(isconmod, pathToDisplay, gitDir, status)
 		imod := <-status
 		return imod + color.Sprintf(color.BrightBlack, "("+env+")")
 	}
 	if gitDir != "" {
+		isconmod := iscontentmodified(gitDir)
 		status := make(chan string)
-		go findstatus(isconmod, gbpath, gitDir, status)
+		go dispstats(isconmod, pathToDisplay, gitDir, status)
 		imod := <-status
 		return imod
 	}
