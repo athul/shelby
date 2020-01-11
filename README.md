@@ -46,9 +46,9 @@ Add this to your `.bashrc` file:
 ```bash
 prompt_shelby_load() {
 if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;31m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;91m\]❯\[\e[0m\]"
   else
-    local prompt_symbol="\[\e[0;32m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
   fi
 
   PS1="$(~/.local/bin/shelby)\n${prompt_symbol} " 
@@ -62,11 +62,11 @@ Add this to your `.zshrc` file:
 
 ```zsh
 autoload -Uz add-zsh-hook
-prompt_shelby_load() { ~/.local/bin/shelby } 
-add-zsh-hook precmd prompt_shelby_load
-
+prompt_shelby_cmd() { ~/.local/bin/shelby }
+add-zsh-hook precmd prompt_shelby_cmd
 prompt_symbol='❯'
-PROMPT="%(?.%F{green}.%F{red})${prompt_symbol}%f "
+
+PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 ```
 
 
