@@ -16,7 +16,7 @@ type ismodified struct {
 	ustbool   bool
 	untracked int
 	notStaged int
-	staged    int
+	staged    bool
 	state     string
 }
 
@@ -88,8 +88,7 @@ func parseGitStats(status []string) ismodified {
 					stats.utrbool = true
 				default:
 					if code[0] != ' ' {
-						stats.staged++
-
+						stats.staged = true
 					}
 					if code[1] != ' ' {
 						stats.notStaged++
@@ -104,18 +103,13 @@ func parseGitStats(status []string) ismodified {
 func iscontentmodified(path string) ismodified {
 	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
-	if err != nil {
-
-	}
 	stats := parseGitStats(status)
-	outstat, err := rungitcommands("git", "status", "-u", "no")
-
-	if strings.Contains(outstat, "ahead") {
-		stats.state = "ahead"
-	} else if strings.Contains(outstat, "behind") == true {
+	if strings.Contains(out, ",") {
+		stats.state = "diverged"
+	} else if strings.Contains(out, "behind") {
 		stats.state = "behind"
-	} else if strings.Contains(outstat, "diverged") == true {
-		stats.state = "both"
+	} else if strings.Contains(out, "ahead") {
+		stats.state = "ahead"
 	} else {
 		stats.state = "clean"
 	}
