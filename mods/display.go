@@ -1,8 +1,6 @@
 package mods
 
-import (
-	"github.com/talal/go-bits/color"
-)
+import "github.com/talal/go-bits/color"
 
 func dispstats(m ismodified, path string, gdir string, status chan string) {
 	branch := currentGitBranch(gdir)
