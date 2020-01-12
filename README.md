@@ -19,8 +19,8 @@ $ sh -c "$(curl -sL https://git.io/ishelby)"
 ```
 ----
 OR
-- Download the binary from the [WorkFlow Artifacts](https://github.com/athul/shelby/actions?query=workflow%3A%22Go+Build%22).
-- You might wanto to make the binary executable, run `chmod 775 <binary_name>`
+- Download the binary from the [WorkFlow Artifacts](https://github.com/athul/shelby/actions?query=workflow%3A%22Go+Build%22)(Only for Linux)
+- You might wanto to make the binary executable, run `chmod +x <binary_name>`
 - Move the Binary to `/usr/local/bin/`
 
 Build From Source
@@ -71,12 +71,15 @@ PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 
 
 ### Extra Bits
+- Displays the Current Git Branch
 - `[+]` shows if you've got Untracked Files
   - `[2+]` shows if you've got 2 untracked files
 - `[!]` shows if you've got Unstaged Files
   - `[3!]` shows if you've got 3 unstaged files
+- `↑` if your HEAD is ahead
+- `↓` if your HEAD is behind
+- `⇅` if your HEAD is diverged
 - Dispalys any VirtualENVs you're working in
-- Displays the Current Git Branch
 - Displays **Username** and **Hostname** of the machine while in SSH
 - Small Size(~=2MB)
 
@@ -90,7 +93,7 @@ PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 - [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
 
 ## Support My work
-<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 20px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height:20px !important;width: 100px !important;" ></a>
 
 **Logo Made by** [Sreeram aka @fillerink](https://github.com/fillerink)
 
