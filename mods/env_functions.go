@@ -11,12 +11,15 @@ func gethost() (string, string) {
 	uname := os.Getenv("USER")
 	return uname, strings.SplitN(hname, ".", 2)[0]
 }
-func isssh(probs chan bool) {
+func isssh() bool {
+	var probs bool
 	cmd := os.Getenv("SSH_CLIENT")
 	if cmd != "" {
-		probs <- true
+		probs = true
+		return probs
 	}
-	probs <- false
+	probs = false
+	return probs
 }
 func getenv() string {
 	env := os.Getenv("VIRTUAL_ENV")

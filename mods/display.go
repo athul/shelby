@@ -1,37 +1,34 @@
 package mods
 
-import (
-	"fmt"
-	"strconv"
-
-	"github.com/talal/go-bits/color"
-)
+import "github.com/talal/go-bits/color"
 
 func dispstats(m ismodified, path string, gdir string, status chan string) {
 	branch := currentGitBranch(gdir)
 	nm := color.Sprintf(color.BrightGreen, path) + " on " + color.Sprintf(color.BrightYellow, ` `+branch)
 	states := map[string]string{
-		"ahead":  "↑",
-		"behind": "↓",
-		"both":   "⇅",
+		"ahead":    "↑",
+		"behind":   "↓",
+		"diverged": "⇅",
 	}
 	ius := "!"
 	itr := "+"
-	nstg_count := strconv.Itoa(m.notStaged)
-	ntrc_count := strconv.Itoa(m.untracked)
+	stg := "✔"
+	//nstgcount := strconv.Itoa(m.notStaged)
+	//ntrccount := strconv.Itoa(m.untracked)
 	stt := states[m.state]
-
 	if m.utrbool && m.ustbool {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s][%s%s] %s", nstg_count, ius, ntrc_count, itr, stt))
+		status <- nm + color.Sprintf(color.BrightRed, " [%d%s][%d%s] %s", m.notStaged, ius, m.untracked, itr, stt)
 	}
 	if !m.utrbool && m.ustbool {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s] %s", nstg_count, ius, stt))
+		status <- nm + color.Sprintf(color.BrightRed, " [%d%s] %s", m.notStaged, ius, stt)
 	}
 	if m.utrbool && !m.ustbool {
-		status <- nm + color.Sprintf(color.BrightRed, fmt.Sprintf(" [%s%s] %s", ntrc_count, itr, stt))
+		status <- nm + color.Sprintf(color.BrightRed, " [%d%s] %s", m.untracked, itr, stt)
+	}
+	if !m.ustbool && !m.utrbool && m.staged {
+		status <- nm + color.Sprintf(color.BrightMagenta, " %s %s ", stg, stt)
 	}
 	if !m.ustbool && !m.utrbool {
-		status <- nm + color.Sprintf(color.BrightBlue, " "+stt)
+		status <- nm + color.Sprintf(color.BrightBlue, " %s", stt)
 	}
-
 }

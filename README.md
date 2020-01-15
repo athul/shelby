@@ -72,6 +72,7 @@ PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 
 ### Extra Bits
 - Displays the Current Git Branch
+- `✔` shows if any staged files are present
 - `[+]` shows if you've got Untracked Files
   - `[2+]` shows if you've got 2 untracked files
 - `[!]` shows if you've got Unstaged Files

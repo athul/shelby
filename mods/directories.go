@@ -36,7 +36,7 @@ func getDir(cwd string) string {
 		status := make(chan string)
 		go dispstats(isconmod, pathToDisplay, gitDir, status)
 		imod := <-status
-		return imod + color.Sprintf(color.BrightBlack, "("+env+")")
+		return imod + color.Sprintf(color.BrightBlack, "(%s)", env)
 	}
 	if gitDir != "" {
 		isconmod := iscontentmodified(gitDir)

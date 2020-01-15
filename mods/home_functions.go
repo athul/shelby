@@ -25,9 +25,8 @@ func emptifier(list []string, val string) []string {
 	return append(list, val)
 }
 func stripHomeDir(path string) string {
-	ssh := make(chan bool)
-	go isssh(ssh)
-	sshtrue := <-ssh
+
+	sshtrue := isssh()
 	name, host := gethost()
 	if sshtrue == true {
 		return strings.Replace(path, os.Getenv("HOME"), color.Sprintf(color.BrightGreen, name+" on "+host)+" ~", 1)
