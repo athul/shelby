@@ -1,19 +1,18 @@
 package mods
 
-var zsh = `
-autoload -Uz
-precmd() {
-	prompt_symbol='❯'
-	PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f
-}`
+var zsh = `function zle-keymap{
+	prompt_symbol='✌︎'
+PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f '
+zle reset-prompt
+}
+zle -N zle-keymap
+`
 
-var bash = `
-export SHELBY_SHELL="bash"
-prompt_shelby_load() {
+var bash = `prompt_shelby_load() {
 if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;91m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;91m\]✌︎\[\e[0m\]"
   else
-    local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;92m\]✌︎\[\e[0m\]"
   fi
 
   PS1="$(~/.local/bin/shelby)\n${prompt_symbol} " 
