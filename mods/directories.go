@@ -28,7 +28,7 @@ func getDir(cwd string) string {
 	//pathToDisplay = shortenLongPath(pathToDisplay, 2)
 	//gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
-	handleError(err)
+	HandleError(err)
 	env := getenv()
 
 	if gitDir != "" && env != "" && env != "." {

@@ -5,14 +5,14 @@ import "github.com/talal/go-bits/color"
 func dispstats(m ismodified, path string, gdir string, status chan string) {
 	branch := currentGitBranch(gdir)
 	nm := color.Sprintf(color.BrightGreen, path) + " on " + color.Sprintf(color.BrightYellow, ` `+branch)
+	ius := "!"
+	itr := "+"
+	stg := "✔"
 	states := map[string]string{
 		"ahead":    "↑",
 		"behind":   "↓",
 		"diverged": "⇅",
 	}
-	ius := "!"
-	itr := "+"
-	stg := "✔"
 	//nstgcount := strconv.Itoa(m.notStaged)
 	//ntrccount := strconv.Itoa(m.untracked)
 	stt := states[m.state]
