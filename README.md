@@ -94,7 +94,14 @@ PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 - [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
 
 ## Support My work
-<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height:20px !important;width: 100px !important;" ></a>
+
+<center><p ><img height='100' style='border:0px;height:36px;' src='https://imgix.bustle.com/uploads/image/2019/5/2/ffa82ad4-937e-412c-9bfd-33cb9252e88e-instagram-donate.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70' border='0' alt='Donations' /></a>
+</p>
+<h3>Donation: UPI ID: <b>athul8720@oksbi</b></h3>
+</center>
+
+
+### 
 
 **Logo Made by** [Sreeram aka @fillerink](https://github.com/fillerink)
 
