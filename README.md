@@ -17,6 +17,15 @@ Follow the steps below, and **Post Installation Instructions**
 ```bash
 $ sh -c "$(curl -sL https://git.io/ishelby)"	
 ```
+
+---
+OR
+For **MacOS** Users, install via _*Homebrew*_
+
+```bash
+brew install athul/tap/shelby
+```
+
 ----
 OR
 - Download the binary from the [WorkFlow Artifacts](https://github.com/athul/shelby/actions?query=workflow%3A%22Go+Build%22)(Only for Linux)
