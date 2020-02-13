@@ -73,9 +73,7 @@ Add this to your `.zshrc` file:
 autoload -Uz add-zsh-hook
 prompt_shelby_cmd() { ~/.local/bin/shelby }
 add-zsh-hook precmd prompt_shelby_cmd
-prompt_symbol='❯'
-
-PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
+PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})❯%f'
 ```
 
 
