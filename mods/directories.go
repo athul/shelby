@@ -18,15 +18,12 @@ func getDir(cwd string) string {
 
 	if nearestAccessiblePath != cwd {
 		inAccessiblePath := strings.TrimPrefix(cwd, nearestAccessiblePath)
-		//nearestAccessiblePath = shortenLongPath(stripHomeDir(nearestAccessiblePath), 1)
 
 		return color.Sprintf(color.Blue, nearestAccessiblePath) +
 			color.Sprintf(color.Red, inAccessiblePath)
 	}
 
 	pathToDisplay := stripHomeDir(cwd)
-	//pathToDisplay = shortenLongPath(pathToDisplay, 2)
-	//gbpath := pathToDisplay[strings.LastIndex(pathToDisplay, "/")+1:]
 	gitDir, err := findGitRepo(cwd)
 	handleError(err)
 	env := getenv()
@@ -49,6 +46,8 @@ func getDir(cwd string) string {
 	return color.Sprintf(color.BrightCyan, pathToDisplay)
 }
 
+// findNearestAccessiblePath takes the last string after the splitting
+// the path from the the path from os.Stat fn recursively
 func findNearestAccessiblePath(path string) string {
 	_, err := os.Stat(path)
 	if err == nil {

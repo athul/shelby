@@ -10,7 +10,7 @@ import (
 )
 
 //var host = gethost()
-
+// Get the current working Directory
 func cwdir() string {
 	wd, err := os.Getwd()
 	if err != nil {
@@ -18,14 +18,17 @@ func cwdir() string {
 	}
 	return filepath.Clean(wd)
 }
+
+// Clean the array
 func emptifier(list []string, val string) []string {
 	if val == "" {
 		return list
 	}
 	return append(list, val)
 }
-func stripHomeDir(path string) string {
 
+//
+func stripHomeDir(path string) string {
 	sshtrue := isssh()
 	name, host := gethost()
 	if sshtrue == true {
@@ -38,6 +41,8 @@ func handleError(err error) {
 		color.Fprintf(os.Stderr, color.BrightRed, "Prompt error: %v\n", err)
 	}
 }
+
+// Return the Exit Code if an arg is passed
 func getExitCodeField(arg string) string {
 	exitCode, err := strconv.Atoi(arg)
 	if err == nil && exitCode > 0 {
