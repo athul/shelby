@@ -2,6 +2,7 @@ package mods
 
 import "github.com/talal/go-bits/color"
 
+//Display the status of the Git Repo
 func dispstats(m ismodified, path string, gdir string, status chan string) {
 	branch := currentGitBranch(gdir)
 	nm := color.Sprintf(color.BrightGreen, path) + " on " + color.Sprintf(color.BrightYellow, ` `+branch)

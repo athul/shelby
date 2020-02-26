@@ -20,6 +20,7 @@ type ismodified struct {
 	state     string
 }
 
+// Find a git repo if a .git folder is found
 func findGitRepo(path string) (string, error) {
 	gitEntry := filepath.Join(path, ".git")
 	fi, err := os.Stat(gitEntry)
@@ -40,6 +41,8 @@ func findGitRepo(path string) (string, error) {
 
 	return gitEntry, nil
 }
+
+// Find the Current Git Branch using git files
 func currentGitBranch(gitDir string) string {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
@@ -56,6 +59,8 @@ func currentGitBranch(gitDir string) string {
 	branch := strings.TrimPrefix(refSpec, "ref: refs/heads/")
 	return branch
 }
+
+// Setting the envs for Git Command Execution
 func gitProcessEnv() []string {
 	home, _ := os.LookupEnv("HOME")
 	path, _ := os.LookupEnv("PATH")
@@ -70,12 +75,16 @@ func gitProcessEnv() []string {
 	}
 	return result
 }
+
+// Run git Commands
 func rungitcommands(cmd string, args ...string) (string, error) { //  as params
 	command := exec.Command(cmd, args...) //,  as params
 	command.Env = gitProcessEnv()
 	op, err := command.Output()
 	return string(op), err
 }
+
+// Parse the Git Status for untracked, modified and staged
 func parseGitStats(status []string) ismodified {
 	stats := ismodified{}
 	if len(status) > 1 {
@@ -100,6 +109,8 @@ func parseGitStats(status []string) ismodified {
 	}
 	return stats
 }
+
+// Check if the content is Modified for a git repo
 func iscontentmodified(path string) ismodified {
 	out, err := rungitcommands("git", "status", "--porcelain", "-b", "--ignore-submodules")
 	status := strings.Split(out, "\n")
