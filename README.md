@@ -53,16 +53,7 @@ command exited with an error.
 Add this to your `.bashrc` file:
 
 ```bash
-prompt_shelby_load() {
-if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;91m\]❯\[\e[0m\]"
-  else
-    local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
-  fi
-
-  PS1="$(/usr/local/bin/shelby)\n${prompt_symbol} " 
-}
-PROMPT_COMMAND=prompt_shelby_load
+eval "$(shelby init bash)"
 ```
 
 ### Zsh
@@ -70,10 +61,7 @@ PROMPT_COMMAND=prompt_shelby_load
 Add this to your `.zshrc` file:
 
 ```zsh
-autoload -Uz add-zsh-hook
-prompt_shelby_cmd() { /usr/local/bin/shelby }
-add-zsh-hook precmd prompt_shelby_cmd
-PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})❯%f'
+eval "$(shelby init zsh)"
 ```
 
 

@@ -11,7 +11,7 @@ var cwd string
 func Info() string {
 	cwd = cwdir()
 	if cwd == "" {
-		handleError(errors.New("could not get path for current working directory"))
+		HandleError(errors.New("could not get path for current working directory"))
 	}
 
 	info := make([]string, 1)

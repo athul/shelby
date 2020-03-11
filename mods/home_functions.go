@@ -3,7 +3,6 @@ package mods
 import (
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 
 	"github.com/talal/go-bits/color"
@@ -29,24 +28,16 @@ func emptifier(list []string, val string) []string {
 
 //
 func stripHomeDir(path string) string {
-	sshtrue := isssh()
 	name, host := gethost()
-	if sshtrue == true {
+	if isssh() {
 		return strings.Replace(path, os.Getenv("HOME"), color.Sprintf(color.BrightGreen, name+" on "+host)+" ~", 1)
 	}
 	return strings.Replace(path, os.Getenv("HOME"), "~", 1)
 }
-func handleError(err error) {
+
+//HandleError will handle all errors
+func HandleError(err error) {
 	if err != nil {
 		color.Fprintf(os.Stderr, color.BrightRed, "Prompt error: %v\n", err)
 	}
-}
-
-// Return the Exit Code if an arg is passed
-func getExitCodeField(arg string) string {
-	exitCode, err := strconv.Atoi(arg)
-	if err == nil && exitCode > 0 {
-		return color.Sprintf(color.BrightRed, "exit:"+arg)
-	}
-	return ""
 }

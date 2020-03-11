@@ -46,7 +46,7 @@ func findGitRepo(path string) (string, error) {
 func currentGitBranch(gitDir string) string {
 	bytes, err := ioutil.ReadFile(filepath.Join(gitDir, "HEAD"))
 	if err != nil {
-		handleError(err)
+		HandleError(err)
 		return "unknown"
 	}
 	refSpec := strings.TrimSpace(string(bytes))
@@ -124,8 +124,8 @@ func iscontentmodified(path string) ismodified {
 	} else {
 		stats.state = "clean"
 	}
-	if err != nil {
-
+	if err == nil {
+		HandleError(err)
 	}
 	return stats
 

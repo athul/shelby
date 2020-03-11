@@ -25,7 +25,7 @@ func getDir(cwd string) string {
 
 	pathToDisplay := stripHomeDir(cwd)
 	gitDir, err := findGitRepo(cwd)
-	handleError(err)
+	HandleError(err)
 	env := getenv()
 
 	if gitDir != "" && env != "" && env != "." {
