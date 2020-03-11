@@ -37,3 +37,12 @@ release:
   github:
     owner: athul
     name: shelby
+brews:
+- name: shelby
+  github:
+    owner: athul
+    name: homebrew-tap
+  folder: Formula
+  homepage: "https://github.com/athul/shelby"
+  description: "A fast and minimal Shell Prompt in Go with 🦋"
+  install: bin.install "shelby"

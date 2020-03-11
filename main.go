@@ -2,29 +2,17 @@ package main
 
 import (
 	"os"
-	"path"
 
 	"github.com/athul/shelby/mods"
 	"github.com/urfave/cli"
 )
 
-var shell = path.Base(os.Getenv("SHELBY_SHELL"))
-
-/* func main() {
-	fmt.Printf(shell)
-
-	if len(os.Args) > 1 {
-		color.Fprint(os.Stderr, color.Red, "Error.....\n")
-		os.Exit(1)
-	}
-	os.Stdout.Write([]byte("\n" + mods.Info() + "\n"))
-}.
-*/
 func main() {
 	app := cli.NewApp()
 	app.Usage = "The Prompt with Wings"
 	app.Commands = []cli.Command{
 		sbInit,
+		sbInfo,
 	}
 	app.Run(os.Args)
 }
@@ -32,24 +20,27 @@ func main() {
 var sbInit = cli.Command{
 	Name:        "init",
 	Usage:       "Initialize the Shell",
-	Description: `Put 'eval "$(shelby init)"' in your ~/.profile or ~/.bashrc or ~/.zshrc`,
+	Description: `Put 'eval "$(shelby init <shell>)"' in your ~/.profile or ~/.bashrc or ~/.zshrc`,
 	Action: func(ctx *cli.Context) error {
-		script := mods.UseShell(shell)
-		//fmt.Print(script)
-		os.Stdout.Write([]byte("\n" + mods.Info() + "\n "))
-		os.Stdout.Write([]byte(script))
-		return nil
-	},
-
-	/* Action: func(ctx *cli.Context) error {
-		script, err := ioutil.ReadFile("/usr/local/bin/init." + shell)
-		if err == nil {
-			//fmt.Print(script)
-			os.Stdout.Write([]byte("\n" + mods.Info() + "\n"))
-			os.Stdout.Write(script)
-		} else {
-			mods.HandleError(err)
+		if ctx.NArg() == 1 {
+			script := mods.UseShell(ctx.Args().First())
+			if script != "" {
+				os.Stdout.Write([]byte(script))
+			} else {
+				os.Stderr.Write([]byte("Error.....\n"))
+				os.Exit(1)
+			}
 		}
 		return nil
-	}, */
+	},
+}
+
+var sbInfo = cli.Command{
+	Name:        "info",
+	Usage:       "Print directory info",
+	Description: "Print directory and other mods info in a line",
+	Action: func(ctx *cli.Context) error {
+		os.Stdout.Write([]byte(mods.Info()))
+		return nil
+	},
 }

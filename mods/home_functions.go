@@ -9,7 +9,7 @@ import (
 )
 
 //var host = gethost()
-
+// Get the current working Directory
 func cwdir() string {
 	wd, err := os.Getwd()
 	if err != nil {
@@ -17,17 +17,19 @@ func cwdir() string {
 	}
 	return filepath.Clean(wd)
 }
+
+// Clean the array
 func emptifier(list []string, val string) []string {
 	if val == "" {
 		return list
 	}
 	return append(list, val)
 }
-func stripHomeDir(path string) string {
 
-	sshtrue := isssh()
+//
+func stripHomeDir(path string) string {
 	name, host := gethost()
-	if sshtrue == true {
+	if isssh() {
 		return strings.Replace(path, os.Getenv("HOME"), color.Sprintf(color.BrightGreen, name+" on "+host)+" ~", 1)
 	}
 	return strings.Replace(path, os.Getenv("HOME"), "~", 1)
@@ -39,12 +41,3 @@ func HandleError(err error) {
 		color.Fprintf(os.Stderr, color.BrightRed, "Prompt error: %v\n", err)
 	}
 }
-
-/* func getExitCodeField(arg string) string {
-	exitCode, err := strconv.Atoi(arg)
-	if err == nil && exitCode > 0 {
-		return color.Sprintf(color.BrightRed, "exit:"+arg)
-	}
-	return ""
-}
-*/

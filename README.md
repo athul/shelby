@@ -17,6 +17,15 @@ Follow the steps below, and **Post Installation Instructions**
 ```bash
 $ sh -c "$(curl -sL https://git.io/ishelby)"	
 ```
+
+---
+OR
+For **MacOS** Users, install via _*Homebrew*_
+
+```bash
+brew install athul/tap/shelby
+```
+
 ----
 OR
 - Download the binary from the [WorkFlow Artifacts](https://github.com/athul/shelby/actions?query=workflow%3A%22Go+Build%22)(Only for Linux)
@@ -44,16 +53,7 @@ command exited with an error.
 Add this to your `.bashrc` file:
 
 ```bash
-prompt_shelby_load() {
-if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;91m\]❯\[\e[0m\]"
-  else
-    local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
-  fi
-
-  PS1="$(~/.local/bin/shelby)\n${prompt_symbol} " 
-}
-PROMPT_COMMAND=prompt_shelby_load
+eval "$(shelby init bash)"
 ```
 
 ### Zsh
@@ -61,12 +61,7 @@ PROMPT_COMMAND=prompt_shelby_load
 Add this to your `.zshrc` file:
 
 ```zsh
-autoload -Uz add-zsh-hook
-prompt_shelby_cmd() { ~/.local/bin/shelby }
-add-zsh-hook precmd prompt_shelby_cmd
-prompt_symbol='❯'
-
-PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
+eval "$(shelby init zsh)"
 ```
 
 
@@ -94,7 +89,14 @@ PROMPT=$'%(?.%{\e[92m%}.%{\e[91m%})${prompt_symbol}%f'
 - [Powerline-Go by @justjanne](https://github.com/justjanne/powerline-go/)
 
 ## Support My work
-<a href="https://www.buymeacoffee.com/JeVlc7T" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height:20px !important;width: 100px !important;" ></a>
+
+<center><p ><img height='100' style='border:0px;height:36px;' src='https://imgix.bustle.com/uploads/image/2019/5/2/ffa82ad4-937e-412c-9bfd-33cb9252e88e-instagram-donate.jpg?w=1020&h=576&fit=crop&crop=faces&auto=format&q=70' border='0' alt='Donations' /></a>
+</p>
+<h3>Donation: UPI ID: <b>athul8720@oksbi</b></h3>
+</center>
+
+
+### 
 
 **Logo Made by** [Sreeram aka @fillerink](https://github.com/fillerink)
 
