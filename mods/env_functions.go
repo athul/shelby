@@ -15,19 +15,15 @@ func gethost() (string, string) {
 
 // Check if the system is on SSH
 func isssh() bool {
-	var probs bool
 	cmd := os.Getenv("SSH_CLIENT")
 	if cmd != "" {
-		probs = true
-		return probs
+		return true
 	}
-	probs = false
-	return probs
+	return false
 }
 
 // Return if any Virtual ENvironment is on
 func getenv() string {
 	env := os.Getenv("VIRTUAL_ENV")
-	venv := path.Base(env)
-	return venv
+	return path.Base(env)
 }
