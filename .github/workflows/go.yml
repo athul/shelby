@@ -35,11 +35,3 @@ jobs:
       with:
         name: Shelby Binary
         path: shelby
-
-    - name: Statusoli	
-      uses: athul/statusoli@master	
-      if: always()	
-      with:	
-        chat: ${{ secrets.chat }}	
-        token: ${{ secrets.token }}	
-        status: ${{ job.status }}

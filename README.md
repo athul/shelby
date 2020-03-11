@@ -12,7 +12,7 @@ Shelby is a fast ⚡️ ,lightweight ☁️ ,minimal✨, shell prompt written in
 
 -------
 ## Installation
-Follow the steps below, and **Post Installation Instructions**
+Follow the steps below(Linux and macOS), and **Post Installation Instructions**
 - Run
 ```bash
 $ sh -c "$(curl -sL https://git.io/ishelby)"	
@@ -20,7 +20,7 @@ $ sh -c "$(curl -sL https://git.io/ishelby)"
 
 ---
 OR
-For **MacOS** Users, install via _*Homebrew*_
+For **macOS** Users, install via _*Homebrew*_
 
 ```bash
 brew install athul/tap/shelby
@@ -41,11 +41,9 @@ Build From Source
 
 ## Post Installation Instructions
 
-> You must have to add the below code to either the Bashrc or Zshrc file inorder to Shelby to fully work.
+> You must have to add the below code to either the `.bashrc` or `.zshrc` or `.profile` file inorder to Shelby to fully work.
 
-The following usage examples are just one example of how Shelby can be
-configured. The examples below will result in a setup similar to the one shown
-in the demo above: the prompt symbol (`❯`) changes to red if the previous
+The prompt symbol is `❯` and changes to red if the previous
 command exited with an error.
 
 ### Bash
