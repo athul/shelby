@@ -1,9 +1,9 @@
 package mods
 
-var zsh = `autoload -Uz add-zsh-hook
-prompt_shelby_cmd() { dir=$(/usr/local/bin/shelby info) }
-add-zsh-hook precmd prompt_shelby_cmd
-PROMPT=$'$dir\n%(?.%{\e[92m%}.%{\e[91m%})❯%f'`
+var zsh = `
+setopt PROMPT_SUBST
+NW=$'\n'
+PROMPT='$(/usr/local/bin/shelby info)${NW}%(?.%F{green}.%F{red})❯%f'`
 
 var bash = `prompt_shelby_load() {
 if [ $? != 0 ]; then
