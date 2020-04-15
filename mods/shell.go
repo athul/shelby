@@ -3,7 +3,7 @@ package mods
 var zsh = `
 setopt PROMPT_SUBST
 NW=$'\n'
-PROMPT='$(/usr/local/bin/shelby info)${NW}%(?.%F{green}.%F{red})❯%f'`
+PROMPT='$(shelby info)${NW}%(?.%F{green}.%F{red})❯%f'`
 
 var bash = `prompt_shelby_load() {
 if [ $? != 0 ]; then
@@ -12,7 +12,7 @@ else
     local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
 fi
 
-PS1="$(/usr/local/bin/shelby info)\n${prompt_symbol} " 
+PS1="$(shelby info)\n${prompt_symbol} "
 }
 PROMPT_COMMAND=prompt_shelby_load
 `
