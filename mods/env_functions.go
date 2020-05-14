@@ -23,7 +23,14 @@ func isssh() bool {
 }
 
 // Return if any Virtual ENvironment is on
-func getenv() string {
+func getifvenv() string {
 	env := os.Getenv("VIRTUAL_ENV")
 	return path.Base(env)
+}
+func getgopath() bool {
+	gpath := os.Getenv("GOPATH")
+	if strings.Contains(os.Getenv("PWD"), gpath) {
+		return true
+	}
+	return false
 }

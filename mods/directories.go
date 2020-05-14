@@ -8,6 +8,10 @@ import (
 	"github.com/talal/go-bits/color"
 )
 
+/*
+This file does all the printing. Directories, git branches and whatnot
+*/
+
 // getDir returns information regarding the current working directory.
 func getDir(cwd string) string {
 	if cwd == "/" {
@@ -26,7 +30,7 @@ func getDir(cwd string) string {
 	pathToDisplay := stripHomeDir(cwd)
 	gitDir, err := findGitRepo(cwd)
 	HandleError(err)
-	env := getenv()
+	env := getifvenv()
 
 	if gitDir != "" && env != "" && env != "." {
 		isconmod := iscontentmodified(gitDir)
