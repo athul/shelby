@@ -31,7 +31,9 @@ func getDir(cwd string) string {
 	gitDir, err := findGitRepo(cwd)
 	HandleError(err)
 	env := getifvenv()
-
+	if checkifRoot() {
+		return color.Sprintf(color.BrightRed, "root ") + "at " + color.Sprintf(color.BrightCyan, pathToDisplay)
+	}
 	if gitDir != "" && env != "" && env != "." {
 		isconmod := iscontentmodified(gitDir)
 		status := make(chan string)
