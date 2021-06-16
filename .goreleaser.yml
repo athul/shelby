@@ -44,5 +44,5 @@ brews:
     name: homebrew-tap
   folder: Formula
   homepage: "https://github.com/athul/shelby"
-  description: "A fast and minimal Shell Prompt in Go with 🦋"
+  description: "A fast and minimal Shell Prompt in Go"
   install: bin.install "shelby"

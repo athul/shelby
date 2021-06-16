@@ -16,10 +16,7 @@ func gethost() (string, string) {
 // Check if the system is on SSH
 func isssh() bool {
 	cmd := os.Getenv("SSH_CLIENT")
-	if cmd != "" {
-		return true
-	}
-	return false
+	return cmd != ""
 }
 
 // Return if any Virtual ENvironment is on
@@ -29,8 +26,5 @@ func getifvenv() string {
 }
 func getgopath() bool {
 	gpath := os.Getenv("GOPATH")
-	if strings.Contains(os.Getenv("PWD"), gpath) {
-		return true
-	}
-	return false
+	return strings.Contains(os.Getenv("PWD"), gpath)
 }
