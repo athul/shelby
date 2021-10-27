@@ -39,6 +39,7 @@ brews:
     tap:
       owner: athul
       name: homebrew-tap
+      token: "{{ .Env.HB_TOKEN }}"
     folder: Formula
     homepage: "https://github.com/athul/shelby"
     description: "A fast and minimal Shell Prompt in Go"
