@@ -2,4 +2,5 @@ main
 .DS_Store
 shelby
 
-.vscode/
+.vscode/dist/
+dist/

@@ -1,48 +1,45 @@
-# This is an example goreleaser.yaml file with some sane defaults.
+# This is an example .goreleaser.yml file with some sane defaults.
 # Make sure to check the documentation at http://goreleaser.com
 before:
   hooks:
-    # you may remove this if you don't use vgo
+    # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
-    - go get -v 
+    - go get -v
 builds:
-- 
-
-  env:
-    - CGO_ENABLED=0
-  ldflags:
-    - -s -w 
-  goos:
-    - darwin
-    - linux
-  goarch:
-    - amd64
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+      - arm
 archives:
-- replacements:
-    darwin: Darwin
-    linux: Linux
-    amd64: x86_64
+  - replacements:
+      darwin: Darwin
+      linux: Linux
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
-  name_template: "{{ .Tag }}"
+  name_template: "{{ .Tag }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - "^docs:"
+      - "^test:"
 release:
   github:
     owner: athul
     name: shelby
 brews:
-- name: shelby
-  github:
-    owner: athul
-    name: homebrew-tap
-  folder: Formula
-  homepage: "https://github.com/athul/shelby"
-  description: "A fast and minimal Shell Prompt in Go with 🦋"
-  install: bin.install "shelby"
+  - name: shelby
+    tap:
+      owner: athul
+      name: homebrew-tap
+    folder: Formula
+    homepage: "https://github.com/athul/shelby"
+    description: "A fast and minimal Shell Prompt in Go"
+    install: bin.install "shelby"%
