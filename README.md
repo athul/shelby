@@ -13,9 +13,10 @@ Shelby is a fast ⚡️ ,lightweight ☁️ ,minimal✨, shell prompt written in
 -------
 ## Installation
 Follow the steps below(Linux and macOS), and **Post Installation Instructions**
-- Run
-```bash
-$ sh -c "$(curl -sL https://git.io/ishelby)"	
+- Run with https://gobinaries.com
+
+```sh
+$ curl -sf https://gobinaries.com/athul/shelby | sh
 ```
 
 ---
