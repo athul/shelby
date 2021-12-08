@@ -8,7 +8,6 @@ import (
 	"github.com/talal/go-bits/color"
 )
 
-//var host = gethost()
 // Get the current working Directory
 func cwdir() string {
 	wd, err := os.Getwd()
@@ -26,7 +25,11 @@ func emptifier(list []string, val string) []string {
 	return append(list, val)
 }
 
-//
+// Replace the Path in Prompt with different formatting
+// with different functions
+// isssh() checks if you're in SSH
+// checkifRoot() checks if you're the root user
+// getgopath() check if you're in the Go path
 func stripHomeDir(path string) string {
 	name, host := gethost()
 	if isssh() {
@@ -35,6 +38,7 @@ func stripHomeDir(path string) string {
 	if getgopath() {
 		return strings.Replace(color.Sprintf(color.BrightMagenta, path), os.Getenv("HOME"), "🐭 ~", 1)
 	}
+
 	return strings.Replace(path, os.Getenv("HOME"), "~", 1)
 }
 
