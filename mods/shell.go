@@ -3,13 +3,13 @@ package mods
 var zsh = `
 setopt PROMPT_SUBST
 NW=$'\n'
-PROMPT='$(shelby info)${NW}%(?.%F{green}.%F{red})❯%f'`
+PROMPT='$(shelby info)${NW}%(?.%F{green}.%F{red})❯ %f'`
 
 var bash = `prompt_shelby_load() {
 if [ $? != 0 ]; then
-    local prompt_symbol="\[\e[0;91m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;91m\]❯ \[\e[0m\]"
 else
-    local prompt_symbol="\[\e[0;92m\]❯\[\e[0m\]"
+    local prompt_symbol="\[\e[0;92m\]❯ \[\e[0m\]"
 fi
 
 PS1="$(shelby info)\n${prompt_symbol} "
